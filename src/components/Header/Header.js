@@ -10,11 +10,11 @@ function Header() {
     <header className='header'>
       <img src={logo} alt='Logo' className='header__logo' />
       <nav className='header__nav'>
-        <Link className='header__link' to=''>
+        <Link className='header__link' to='sign-up'>
           Регистрация
         </Link>
         <div className='header__box'>
-          <Link className='header__link header__link-login' to=''>
+          <Link className='header__link header__link-login' to='sign-in'>
             Войти
           </Link>
         </div>
