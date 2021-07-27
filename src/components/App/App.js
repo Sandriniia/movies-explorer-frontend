@@ -5,6 +5,7 @@ import Header from '../../components/Header/Header';
 import StudentProfilePage from '../../pages/StudentProfilePage/StudentProfilePage';
 import Footer from '../../components/Footer/Footer';
 import Register from '../../pages/Register/Register';
+import Login from '../../pages/Login/Login';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route path='/sign-up'>
           <Register />
+        </Route>
+        <Route path='/sign-in'>
+          <Login />
         </Route>
       </Switch>
     </div>

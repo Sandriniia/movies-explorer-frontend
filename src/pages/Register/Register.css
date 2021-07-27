@@ -73,6 +73,7 @@
 
 .register__question {
   margin: 0;
+  margin-right: 6px;
   color: #a0a0a0;
   font-size: 14px;
   font-weight: 400;
