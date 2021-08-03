@@ -66,7 +66,7 @@
   margin: 0;
   font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 17px;
   text-decoration: none;
   color: #000;
   margin-right: 20px;
@@ -76,4 +76,47 @@
   width: 270px;
   height: 327px;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .about-me {
+    padding: 90px 0;
+  }
+
+  .about-me__title {
+    width: 668px;
+    margin-bottom: 66px;
+  }
+
+  .about-me__info-container {
+    width: 668px;
+  }
+
+  .about-me__text-container {
+    margin-right: 49px;
+  }
+
+  .about-me__name {
+    margin-bottom: 16px;
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__profession {
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__description {
+    width: 364px;
+    margin-bottom: 87px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__image {
+    width: 255px;
+    height: 307px;
+  }
 }

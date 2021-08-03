@@ -1,7 +1,16 @@
 // компонент страницы с сохранёнными карточками фильмов.
 
 import React from 'react';
+import SearchForm from '../../components/SearchForm/SearchForm';
+import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
 
-function SavedMovies() {}
+function SavedMovies() {
+  return (
+    <>
+      <SearchForm />
+      <MoviesCardList />
+    </>
+  );
+}
 
 export default SavedMovies;

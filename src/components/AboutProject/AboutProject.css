@@ -53,9 +53,6 @@
   width: 1140px;
 }
 
-.about-project__weeks-box {
-}
-
 .about-project__box-one {
   width: 228px;
   height: 36px;
@@ -82,4 +79,44 @@
   font-weight: 500;
   line-height: 17px;
   color: #a0a0a0;
+}
+
+@media screen and (max-width: 767px) {
+  .about-project {
+    padding: 90px 0;
+  }
+
+  .about-project__main-title {
+    width: 668px;
+  }
+
+  .about-project__first-container {
+    margin-bottom: 93px;
+    width: 668px;
+  }
+
+  .about-project__text-box {
+    width: 319px;
+    margin-right: 30px;
+  }
+  .about-project__title {
+    margin-bottom: 22px;
+  }
+
+  .about-project__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__second-container {
+    width: 668px;
+  }
+
+  .about-project__box-one {
+    width: 140px;
+  }
+
+  .about-project__box-two {
+    width: 528px;
+  }
 }

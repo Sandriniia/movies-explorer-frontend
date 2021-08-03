@@ -1,5 +1,5 @@
 .promo {
-  padding-top: 75px;
+  padding: 75px 0 92px 0;
   min-height: 440px;
   display: flex;
   justify-content: center;
@@ -8,6 +8,7 @@
 .promo__text {
   margin: 0;
   margin-right: 190px;
+  width: 640px;
   font-size: 50px;
   font-weight: 400;
   line-height: 58px;
@@ -18,4 +19,20 @@
 .promo__image {
   width: 310px;
   height: 304px;
+}
+
+@media screen and (max-width: 767px) {
+  .promo {
+    padding-top: 140px;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .promo__text {
+    width: 680px;
+    font-size: 40px;
+    line-height: 50px;
+    margin: 48px 0 0;
+    text-align: center;
+  }
 }

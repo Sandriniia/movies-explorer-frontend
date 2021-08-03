@@ -26,12 +26,17 @@ function App() {
           <Login />
         </Route>
         <Route path='/movies'>
+          <Header />
           <Movies />
+          <Footer />
         </Route>
         <Route path='/saved-movies'>
+          <Header />
           <SavedMovies />
+          <Footer />
         </Route>
         <Route path='/profile'>
+          <Header />
           <Profile />
         </Route>
       </Switch>

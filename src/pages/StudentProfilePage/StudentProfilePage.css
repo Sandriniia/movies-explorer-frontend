@@ -3,3 +3,9 @@
   min-width: 1280px;
   background-color: #073042;
 }
+
+@media screen and (max-width: 767px) {
+  .student-profile {
+    min-width: 768px;
+  }
+}
