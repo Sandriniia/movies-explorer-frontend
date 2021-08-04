@@ -1,5 +1,5 @@
 .nav {
-  background-color: #000;
+  background-color: #272727;
   height: 66px;
 }
 
@@ -20,4 +20,12 @@
   color: #fff;
   text-decoration: underline;
   margin-right: 40px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 319px) {
+  .nav__item {
+    font-size: 11px;
+    margin-right: 24px;
+  }
 }
