@@ -17,22 +17,24 @@ function SearchForm() {
             <img src={loupe} alt='loupe icon' className='search-form__icon' />
           </button>
         </form>
-        <p className='search-form__text'>Короткометражки</p>
-        <button className='search-form__short-films-button'>
-          {buttonOn ? (
-            <img
-              src={short_films_on}
-              alt='Short films button on'
-              className='search-form__short-films-icon'
-            />
-          ) : (
-            <img
-              src={short_films_off}
-              alt='Short films button off'
-              className='search-form__short-films-icon'
-            />
-          )}
-        </button>
+        <div className='search-form__short-films-box'>
+          <p className='search-form__text'>Короткометражки</p>
+          <button className='search-form__short-films-button'>
+            {buttonOn ? (
+              <img
+                src={short_films_on}
+                alt='Short films button on'
+                className='search-form__short-films-icon'
+              />
+            ) : (
+              <img
+                src={short_films_off}
+                alt='Short films button off'
+                className='search-form__short-films-icon'
+              />
+            )}
+          </button>
+        </div>
       </div>
       <div className='search-form__line'></div>
     </section>

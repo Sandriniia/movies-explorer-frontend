@@ -1,7 +1,7 @@
 .profile {
   margin: 0 auto;
-  width: 100%;
-  padding: 74px 0 70px 0;
+  /* width: 100%; */
+  margin: 74px 0 70px 0;
   display: flex;
   flex-direction: column;
   align-items: center;

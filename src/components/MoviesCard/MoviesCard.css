@@ -35,3 +35,15 @@
   width: 360px;
   height: 200px;
 }
+
+@media screen and (max-width: 767px) {
+  .movie {
+    width: 342px;
+    height: 309px;
+  }
+
+  .movie__image {
+    width: 342px;
+    height: 190px;
+  }
+}
