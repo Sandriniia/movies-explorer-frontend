@@ -1,5 +1,3 @@
-// компонент с описанием дипломного проекта.
-
 import React from 'react';
 import './AboutProject.css';
 
@@ -40,12 +38,6 @@ function AboutProject() {
               <p className='about-project__text'>Front-end</p>
             </div>
           </div>
-          {/* <div>
-            <div className='about-project__box-two'>
-              <p className='about-project__subtitle'>4 недели</p>
-            </div>
-            <p className='about-project__text'>Front-end</p>
-          </div> */}
         </div>
       </div>
     </section>
