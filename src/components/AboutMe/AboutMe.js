@@ -1,8 +1,5 @@
-// компонент с информацией о студенте.
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import photo from '../../images/photo.jpg';
 import './AboutMe.css';
 
 function AboutMe() {
@@ -13,20 +10,23 @@ function AboutMe() {
         <div className='about-me__line'></div>
         <div className='about-me__info-container'>
           <div className='about-me__text-container'>
-            <h1 className='about-me__name'>Sandra</h1>
+            <h1 className='about-me__name'>Сандра</h1>
             <p className='about-me__profession'>Фронтенд-разработчик, 30 лет</p>
             <p className='about-me__description'>
-              Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и
-              дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года
-              работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал
-              заниматься фриланс-заказами и ушёл с постоянной работы.
+              Я живу в Швеции, Мальмо. закончила факультет журналистики СГУ. У меня есть муж и дочь.
+              Я люблю читать, а ещё увлекаюсь ездой на велосипеде. Во время отпуска по уходу за
+              ребенком решила сменить профессию и начала кодить. Прошла курс по веб-разработке в
+              Яндексе и программу подготовки веб-разрабочтиков "FooCoding" в Мальмо.
             </p>
             <div className='about-me__links'>
-              <Link className='about-me__link'>Facebook</Link>
-              <Link className='about-me__link'>Github</Link>
+              <Link to='https://www.facebook.com/sandra.denisovna.9' className='about-me__link'>
+                Facebook
+              </Link>
+              <Link to='https://github.com/Sandriniia' className='about-me__link'>
+                Github
+              </Link>
             </div>
           </div>
-          <img src={photo} alt='' className='about-me__image' />
         </div>
       </div>
     </section>

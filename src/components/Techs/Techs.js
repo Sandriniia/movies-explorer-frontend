@@ -1,5 +1,3 @@
-// компонент с использованными технологиями.
-
 import React from 'react';
 import './Techs.css';
 
