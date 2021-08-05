@@ -1,14 +1,9 @@
 .card-button {
   padding: 0;
-  margin: 18px 0 18px 0;
-  width: 100px;
-  height: 29px;
+  width: 24px;
+  height: 24px;
   outline: none;
-  border: 1px solid #f9f9f9;
-  border-radius: 30px;
-  background-color: #f9f9f9;
-}
-
-.card-button_saved {
-  background-color: #ff3055;
+  border: none;
+  background-color: #202020;
+  cursor: pointer;
 }

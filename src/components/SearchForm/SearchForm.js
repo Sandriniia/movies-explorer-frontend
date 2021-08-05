@@ -1,5 +1,3 @@
-// форма поиска, куда пользователь будет вводить запрос.
-
 import React from 'react';
 import './SearchForm.css';
 import search_button from '../../images/find.png';

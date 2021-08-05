@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import './CardButton.css';
-import saved_icon from '../../images/saved.png';
+import saved from '../../images/saved.png';
+import not_saved from '../../images/not-saved.png';
 
 function CardButton() {
   const location = useLocation();
@@ -14,23 +15,18 @@ function CardButton() {
   }, [location]);
 
   const handleSaveMovie = () => {
-    setIsSaved(true);
+    setIsSaved(!isSaved);
   };
 
   return (
     <>
-      {path === '/saved-movies' && (
-        <button type='submit' className='card-button'>
-          Удалить
-        </button>
-      )}
-      {path === '/movies' && isSaved ? (
-        <button className='card-button card-button_saved'>
-          <img src={saved_icon} alt='saved movie button icon' />
+      {isSaved ? (
+        <button type='submit' className='card-button' onClick={handleSaveMovie}>
+          <img src={saved} alt='saved movie button' />
         </button>
       ) : (
         <button type='submit' className='card-button' onClick={handleSaveMovie}>
-          Сохранить
+          <img src={not_saved} alt='saved movie button' />
         </button>
       )}
     </>
