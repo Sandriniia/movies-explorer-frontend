@@ -1,5 +1,3 @@
-// компонент страницы авторизации.
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
@@ -13,7 +11,7 @@ function Login() {
         <h1 className='login__title'>Рады видеть!</h1>
       </div>
       <form className='login__form'>
-      <p className='login__text'>E-mail</p>
+        <p className='login__text'>E-mail</p>
         <input
           id='email'
           type='email'

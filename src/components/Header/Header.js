@@ -6,7 +6,7 @@ import nav_button from '../../images/navigation.png';
 import account_icon from '../../images/account.png';
 
 function Header() {
-  const isLogged = true;
+  const isLogged = false;
 
   return (
     <header className={`header ${isLogged ? 'header_logged' : ''}`}>

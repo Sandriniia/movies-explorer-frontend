@@ -23,6 +23,7 @@
 .header__nav {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   width: 100%;
 }
 
@@ -39,7 +40,6 @@
   text-decoration: none;
   color: #fff;
   font-size: 12px;
-  margin-left: 20px;
   font-weight: 500;
   line-height: 16px;
 }
