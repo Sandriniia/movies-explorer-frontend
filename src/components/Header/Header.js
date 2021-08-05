@@ -1,5 +1,3 @@
-//  компонент, который отрисовывает шапку сайта на страницу.
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
@@ -29,22 +27,26 @@ function Header() {
           ) : (
             <>
               <div className='header__box-logged'>
-                <Link to='movies' className='header__link header__link_logged'>
-                  Фильмы
-                </Link>
-                <Link to='saved-movies' className='header__link header__link_logged'>
-                  Сохраненные фильмы
-                </Link>
-                <Link to='profile' className='header__link header__link_logged'>
+                <div>
+                  <Link to='movies' className='header__link header__link_logged'>
+                    Фильмы
+                  </Link>
+                  <Link to='saved-movies' className='header__link header__link_logged'>
+                    Сохраненные фильмы
+                  </Link>
+                </div>
+                <div>
+                  <Link to='profile' className='header__link header__link_logged'>
+                    Аккаунт
+                  </Link>
                   <button className='header__account-button'>
                     <img
                       src={account_icon}
                       alt='Account button icon'
                       className='header__account-icon'
                     />
-                    Аккаунт
                   </button>
-                </Link>
+                </div>
               </div>
               <img src={nav_button} alt='Navigation button' className='header__nav-img' />
             </>
