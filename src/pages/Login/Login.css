@@ -1,7 +1,6 @@
 .login {
-  padding: 70px 0 70px 0;
+  padding: 70px 30px 70px 30px;
   margin: 0 auto;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,6 +48,8 @@
 
 .login__input {
   border: none;
+  outline: none;
+  color: #fff;
   padding: 0;
   margin-bottom: 20px;
   background-color: #2f2f2f;
@@ -89,12 +90,6 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 16px;
-}
-
-@media screen and (max-width: 767px) {
-  .login {
-    padding: 232px 30px 232px 30px;
-  }
 }
 
 @media screen and (max-width: 319px) {

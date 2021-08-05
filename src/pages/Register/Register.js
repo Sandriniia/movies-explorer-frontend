@@ -1,5 +1,3 @@
-// компонент страницы регистрации.
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Register.css';
@@ -23,14 +21,7 @@ function Register() {
           className='register__input'
         ></input>
         <p className='register__text'>E-mail</p>
-        <input
-          id='email'
-          type='email'
-          name='email'
-          value=''
-          required
-          className='register__input'
-        ></input>
+        <input id='email' type='email' name='email' value='' required className='register__input' />
         <p className='register__text'>Пароль</p>
         <input
           id='password'
