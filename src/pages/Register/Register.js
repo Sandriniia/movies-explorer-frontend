@@ -7,27 +7,21 @@ function Register() {
   return (
     <section className='register'>
       <div className='register__greeting-box'>
-        <img src={logo} alt='Logo' className='register__logo' />
+        <Link to='/'>
+          <img src={logo} alt='Logo' className='register__logo' />
+        </Link>
         <h1 className='register__title'>Добро пожаловать!</h1>
       </div>
       <form className='register__form'>
         <p className='register__text'>Имя</p>
-        <input
-          id='name'
-          type='text'
-          name='name'
-          value=''
-          required
-          className='register__input'
-        ></input>
+        <input id='name' type='text' name='name' required className='register__input'></input>
         <p className='register__text'>E-mail</p>
-        <input id='email' type='email' name='email' value='' required className='register__input' />
+        <input id='email' type='email' name='email' required className='register__input' />
         <p className='register__text'>Пароль</p>
         <input
           id='password'
           type='password'
           name='password'
-          value=''
           required
           className='register__input'
         ></input>
@@ -36,7 +30,7 @@ function Register() {
         </button>
         <div className='register__question-box'>
           <p className='register__question'>Уже зарегистрированы?</p>
-          <Link to='sign-in' className='register__link'>
+          <Link to='/sign-in' className='register__link'>
             Войти
           </Link>
         </div>

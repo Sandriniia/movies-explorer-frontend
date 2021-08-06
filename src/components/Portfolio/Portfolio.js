@@ -9,15 +9,36 @@ function Portfolio() {
       <div className='portfolio__container'>
         <h5 className='portfolio__title'>Портфолио</h5>
         <div className='portfolio__link-box'>
-          <Link className='portfolio__link'>Статичный сайт</Link>
+          <a
+            href='https://sandriniia.github.io/how-to-learn/'
+            target='_blank'
+            className='portfolio__link'
+            rel='noreferrer'
+          >
+            Статичный сайт
+          </a>
           <img src={pointer} alt='Pointer' className='portfolio__icon' />
         </div>
         <div className='portfolio__link-box'>
-          <Link className='portfolio__link'>Адаптивный сайт</Link>
+          <a
+            href='https://sandriniia.github.io/russian-travel/'
+            target='_blank'
+            className='portfolio__link'
+            rel='noreferrer'
+          >
+            Адаптивный сайт
+          </a>
           <img src={pointer} alt='Pointer' className='portfolio__icon' />
         </div>
         <div className='portfolio__link-box'>
-          <Link className='portfolio__link'>Одностраничное приложение</Link>
+          <a
+            href='https://mesto.sandra.nomoredomains.icu/'
+            target='_blank'
+            className='portfolio__link'
+            rel='noreferrer'
+          >
+            Одностраничное приложение
+          </a>
           <img src={pointer} alt='Pointer' className='portfolio__icon' />
         </div>
       </div>

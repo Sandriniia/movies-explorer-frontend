@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SearchForm.css';
 import search_button from '../../images/find.png';
 import short_films_on from '../../images/short-films-on.png';
 import short_films_off from '../../images/short-films-off.png';
 
 function SearchForm() {
-  const buttonOn = true;
+  const [isButtonOn, setIsButtonOn] = useState(false);
+
+  const handleShortFilmsButtonClick = () => {
+    setIsButtonOn(!isButtonOn);
+  };
   return (
     <section className='search-form'>
       <div className='search-form__container'>
@@ -17,8 +21,8 @@ function SearchForm() {
         </form>
       </div>
       <div className='search-form__short-films-box'>
-        <button className='search-form__short-films-button'>
-          {buttonOn ? (
+        <button className='search-form__short-films-button' onClick={handleShortFilmsButtonClick}>
+          {isButtonOn ? (
             <img
               src={short_films_on}
               alt='Short films button on'

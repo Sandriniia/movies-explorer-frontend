@@ -78,6 +78,11 @@
   text-decoration: none;
   color: #fff;
   margin-right: 20px;
+  cursor: pointer;
+}
+
+.about-me__link:hover {
+  opacity: 0.5;
 }
 
 @media screen and (max-width: 767px) {

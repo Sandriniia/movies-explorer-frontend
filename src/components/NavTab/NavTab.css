@@ -23,6 +23,10 @@
   cursor: pointer;
 }
 
+.nav__item:hover {
+  opacity: 0.5;
+}
+
 @media screen and (max-width: 319px) {
   .nav__item {
     font-size: 11px;

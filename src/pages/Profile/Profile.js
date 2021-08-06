@@ -15,7 +15,7 @@ function Profile() {
         <input className='profile__input' value='pochta@yandex.ru' type='email' />
       </div>
       <button className='profile__button'>Редактировать</button>
-      <Link className='profile__link-out' to=''>
+      <Link className='profile__link-out' to='/'>
         Выйти из аккаунта
       </Link>
     </section>

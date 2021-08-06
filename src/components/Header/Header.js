@@ -1,48 +1,63 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './Header.css';
-import NavigationPopup from '../../components/NavigationPopup/NavigationPopup';
 import AccountButton from '../../components/AccountButton/AccountButton';
 import logo from '../../images/logo.png';
 import nav_button from '../../images/navigation.png';
 
-function Header() {
-  const isLogged = true;
+function Header({ onAccountButton }) {
+  const isLogged = false;
 
   return (
     <header className={`header ${isLogged ? 'header_logged' : ''}`}>
       <div className='header__container'>
-        <img src={logo} alt='Logo' className='header__logo' />
+        <Link to='/'>
+          <img src={logo} alt='Logo' className='header__logo' />
+        </Link>
         <nav className='header__nav'>
           {!isLogged ? (
             <>
-              <Link className='header__link' to='sign-up'>
+              <NavLink className='header__link header__link-register' to='sign-up'>
                 Регистрация
-              </Link>
+              </NavLink>
               <div className='header__box'>
-                <Link className='header__link header__link-login' to='sign-in'>
+                <NavLink className='header__link header__link-login' to='sign-in'>
                   Войти
-                </Link>
+                </NavLink>
               </div>
             </>
           ) : (
             <>
               <div className='header__box-logged'>
                 <div>
-                  <Link to='movies' className='header__link header__link_logged'>
+                  <NavLink
+                    to='movies'
+                    activeClassName='header__link_active'
+                    className='header__link header__link_logged'
+                  >
                     Фильмы
-                  </Link>
-                  <Link to='saved-movies' className='header__link header__link_logged'>
+                  </NavLink>
+                  <NavLink
+                    activeClassName='header__link_active'
+                    to='saved-movies'
+                    className='header__link header__link_logged'
+                  >
                     Сохраненные фильмы
-                  </Link>
+                  </NavLink>
                 </div>
                 <AccountButton />
               </div>
-              <img src={nav_button} alt='Navigation button' className='header__nav-img' />
+              <button className='header__nav-account-button' onClick={onAccountButton}>
+                <img
+                  src={nav_button}
+                  alt='Navigation button'
+                  className='header__nav-img'
+                  onClick={onAccountButton}
+                />
+              </button>
             </>
           )}
         </nav>
-        {/* <NavigationPopup /> */}
       </div>
     </header>
   );

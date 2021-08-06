@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './AboutMe.css';
 
 function AboutMe() {
   return (
-    <section className='about-me'>
+    <section id='about_me' className='about-me'>
       <div className='about-me__container'>
         <h2 className='about-me__title'>Студент</h2>
         <div className='about-me__line'></div>
@@ -19,12 +18,22 @@ function AboutMe() {
               Яндексе и программу подготовки веб-разрабочтиков "FooCoding" в Мальмо.
             </p>
             <div className='about-me__links'>
-              <Link to='https://www.facebook.com/sandra.denisovna.9' className='about-me__link'>
+              <a
+                target='_blank'
+                href='https://www.facebook.com/sandra.denisovna.9'
+                className='about-me__link'
+                rel='noreferrer'
+              >
                 Facebook
-              </Link>
-              <Link to='https://github.com/Sandriniia' className='about-me__link'>
+              </a>
+              <a
+                target='_blank'
+                href='https://github.com/Sandriniia'
+                className='about-me__link'
+                rel='noreferrer'
+              >
                 Github
-              </Link>
+              </a>
             </div>
           </div>
         </div>

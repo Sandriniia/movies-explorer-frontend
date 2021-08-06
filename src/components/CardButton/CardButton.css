@@ -7,3 +7,7 @@
   background-color: #202020;
   cursor: pointer;
 }
+
+.card-button:hover {
+  opacity: 0.6;
+}
