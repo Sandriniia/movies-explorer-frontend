@@ -67,17 +67,6 @@
   border-radius: 3px;
 }
 
-.header__account-button {
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-  background-color: #313131;
-  outline: none;
-  border: none;
-  cursor: pointer;
-}
-
 .header__nav-img {
   display: none;
 }
@@ -117,11 +106,5 @@
     margin-left: 14px;
     width: 54px;
     height: 26px;
-  }
-}
-
-@media screen and (max-width: 319px) {
-  .header {
-    padding: 18px 14px;
   }
 }

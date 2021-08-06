@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import NavigationPopup from '../../components/NavigationPopup/NavigationPopup';
+import AccountButton from '../../components/AccountButton/AccountButton';
 import logo from '../../images/logo.png';
 import nav_button from '../../images/navigation.png';
-import account_icon from '../../images/account.png';
 
 function Header() {
-  const isLogged = false;
+  const isLogged = true;
 
   return (
     <header className={`header ${isLogged ? 'header_logged' : ''}`}>
@@ -35,23 +36,13 @@ function Header() {
                     Сохраненные фильмы
                   </Link>
                 </div>
-                <div>
-                  <Link to='profile' className='header__link header__link_logged'>
-                    Аккаунт
-                  </Link>
-                  <button className='header__account-button'>
-                    <img
-                      src={account_icon}
-                      alt='Account button icon'
-                      className='header__account-icon'
-                    />
-                  </button>
-                </div>
+                <AccountButton />
               </div>
               <img src={nav_button} alt='Navigation button' className='header__nav-img' />
             </>
           )}
         </nav>
+        {/* <NavigationPopup /> */}
       </div>
     </header>
   );
