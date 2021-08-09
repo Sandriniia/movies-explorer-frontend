@@ -10,9 +10,9 @@ import Portfolio from '../../components/Portfolio/Portfolio';
 function StudentProfilePage() {
   return (
     <div className='student-profile'>
-      {/* <Promo /> */}
-      {/* <NavTab /> */}
-      {/* <AboutProject /> */}
+      <Promo />
+      <NavTab />
+      <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />

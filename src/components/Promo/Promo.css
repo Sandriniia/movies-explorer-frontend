@@ -19,17 +19,17 @@
 }
 
 .promo__image {
-  width: 320px;
-  height: 320px;
+  max-width: 320px;
+  width: 100%;
 }
 
 @media screen and (max-width: 767px) {
   .promo {
-    padding: 224px 19px 240px 19px;
+    padding: 224px 0 240px 0;
+    max-width: 730px;
   }
   .promo__text {
     width: 100%;
-    max-width: 730px;
   }
 }
 
