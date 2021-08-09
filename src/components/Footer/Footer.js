@@ -30,7 +30,7 @@ function Footer() {
               href='https://www.facebook.com/sandra.denisovna.9'
               target='_blank'
               rel='noreferrer'
-              className='footer__link'
+              className='footer__link footer__link-facebook'
             >
               Facebook
             </a>
