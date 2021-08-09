@@ -14,7 +14,13 @@ function SearchForm() {
     <section className='search-form'>
       <div className='search-form__container'>
         <form className='search-form__form'>
-          <input className='search-form__input' type='text' autoFocus placeholder='Фильм' />
+          <input
+            className='search-form__input'
+            type='text'
+            autoFocus
+            placeholder='Фильм'
+            required
+          />
           <button type='submit' className='search-form__button'>
             <img src={search_button} alt='loupe icon' className='search-form__icon' />
           </button>
