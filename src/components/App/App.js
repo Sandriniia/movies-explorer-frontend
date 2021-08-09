@@ -29,7 +29,7 @@ function App() {
         <Route exact path='/'>
           <Header onAccountButton={handleNavigationButtonClick} />
           <StudentProfilePage />
-          <Footer />
+          {/* <Footer /> */}
         </Route>
         <Route path='/sign-up'>
           <Register />

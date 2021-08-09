@@ -1,6 +1,6 @@
 .techs {
   margin: 0 auto;
-  padding: 100px 70px;
+  padding: 100px 30px;
   background-color: #272727;
   color: #fff;
 }
@@ -51,7 +51,8 @@
 
 .techs__skill-box {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  max-width: 690px;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   gap: 10px;
 }
 
@@ -74,7 +75,7 @@
 
 @media screen and (max-width: 767px) {
   .techs {
-    padding: 90px 50px;
+    padding: 90px 30px;
   }
 
   .techs__container {
@@ -93,6 +94,12 @@
     margin-bottom: 83px;
     font-size: 12px;
     line-height: 18px;
+  }
+
+  .techs__skill-box {
+    max-width: 648px;
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    gap: 10px;
   }
 
   .techs__skill-item {
