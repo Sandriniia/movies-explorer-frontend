@@ -5,9 +5,7 @@ import AccountButton from '../../components/AccountButton/AccountButton';
 import logo from '../../images/logo.png';
 import nav_button from '../../images/navigation.png';
 
-function Header({ onAccountButton }) {
-  const isLogged = false;
-
+function Header({ onAccountButton, isLogged }) {
   return (
     <header className={`header ${isLogged ? 'header_logged' : ''}`}>
       <div className='header__container'>

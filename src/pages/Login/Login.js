@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import logo from '../../images/logo.png';
 
-function Login() {
+function Login({ onLogin }) {
+  const loginData = {
+    email: '',
+    password: '',
+  };
+  const [data, setData] = useState(loginData);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setData((data) => ({
+      ...data,
+      [name]: value,
+    }));
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!data.email || !data.password) {
+      return;
+    }
+    onLogin(data);
+  }
+
   return (
     <section className='login'>
       <div className='login__greeting-box'>
@@ -12,16 +34,26 @@ function Login() {
         </Link>
         <h1 className='login__title'>Рады видеть!</h1>
       </div>
-      <form className='login__form'>
+      <form className='login__form' onSubmit={handleSubmit}>
         <p className='login__text'>E-mail</p>
-        <input id='email' type='email' name='email' required className='login__input'></input>
+        <input
+          id='email'
+          value={data.email}
+          type='email'
+          name='email'
+          required
+          className='login__input'
+          onChange={handleChange}
+        ></input>
         <p className='login__text'>Пароль</p>
         <input
           id='password'
+          value={data.password}
           type='password'
           name='password'
           required
           className='login__input'
+          onChange={handleChange}
         ></input>
         <button type='submit' className='login__button'>
           Войти

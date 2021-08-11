@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.css';
 
-function Profile() {
+function Profile({ onLogout }) {
   return (
     <section className='profile'>
       <h1 className='profile__title'>Привет, Сандра!</h1>
@@ -15,7 +15,7 @@ function Profile() {
         <input className='profile__input' value='pochta@yandex.ru' type='email' />
       </div>
       <button className='profile__button'>Редактировать</button>
-      <Link className='profile__link-out' to='/'>
+      <Link className='profile__link-out' to='' onClick={onLogout}>
         Выйти из аккаунта
       </Link>
     </section>
