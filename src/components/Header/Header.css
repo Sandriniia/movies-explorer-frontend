@@ -1,0 +1,138 @@
+.header {
+  margin: 0 auto;
+  padding: 18px 70px;
+  background-color: #073042;
+}
+
+.header__container {
+  margin: 0 auto;
+  max-width: 1140px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header_logged {
+  background-color: #202020;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.header__box-logged {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 44px;
+}
+
+.header__link {
+  padding: 0;
+  padding-bottom: 7px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.header__link:hover {
+  opacity: 0.5;
+}
+
+.header__link_active {
+  border-bottom: 2px solid #fff;
+}
+
+.header__link_logged {
+  color: #fff;
+  font-size: 14px;
+  line-height: 18px;
+  margin-right: 16px;
+  margin-left: 0;
+}
+
+.header__link-login {
+  color: #000;
+  padding-bottom: 0;
+}
+
+.header__link-register {
+  padding-bottom: 0;
+}
+
+.header__box {
+  margin-left: 30px;
+  width: 76px;
+  height: 32px;
+  background-color: #3ddc84;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+}
+
+.header__nav-account-button {
+  display: none;
+}
+
+.header__nav-img {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    max-width: 668px;
+    padding: 18px 30px;
+  }
+  .header__box-logged {
+    display: none;
+  }
+
+  .header__nav {
+    justify-content: flex-end;
+  }
+
+  .header__nav-account-button {
+    display: block;
+    background-color: #202020;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .header__nav-img {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .header {
+    padding: 18px 14px;
+  }
+
+  .header__container {
+    max-width: 300px;
+  }
+
+  .header__link {
+    font-size: 10px;
+  }
+
+  .header__box {
+    margin-left: 14px;
+    width: 54px;
+    height: 26px;
+  }
+}

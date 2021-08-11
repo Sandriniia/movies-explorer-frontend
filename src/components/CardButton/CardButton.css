@@ -1,0 +1,13 @@
+.card-button {
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  outline: none;
+  border: none;
+  background-color: #202020;
+  cursor: pointer;
+}
+
+.card-button:hover {
+  opacity: 0.6;
+}

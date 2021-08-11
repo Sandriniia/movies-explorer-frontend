@@ -1,0 +1,131 @@
+.search-form {
+  margin: 0 auto;
+  max-width: 1140px;
+  padding: 70px 70px 48px 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #fff;
+}
+
+.search-form__container {
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 13px;
+  margin-bottom: 33px;
+  border-bottom: 1px solid #424242;
+}
+
+.search-form__form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.search-form__input {
+  padding: 0;
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 34px;
+  color: #fff;
+  background-color: #202020;
+  font-size: 28px;
+}
+
+.search-form__input:focus {
+  opacity: 0.3;
+}
+
+.search-form__input::placeholder {
+  color: #8b8b8b;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 34px;
+}
+
+.search-form__button {
+  padding: 0;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #202020;
+}
+
+.search-form__button:hover {
+  opacity: 0.7;
+}
+
+.search-form__text {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.search-form__short-films-box {
+  display: flex;
+}
+
+.search-form__short-films-button {
+  padding: 0;
+  margin-right: 14px;
+  border: none;
+  outline: none;
+  background: #202020;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .search-form {
+    padding: 80px 30px 61px 30px;
+    max-width: 708px;
+    align-items: flex-end;
+  }
+
+  .search-form__form {
+    align-items: center;
+  }
+
+  .search-form__short-films-box {
+    flex-direction: row-reverse;
+  }
+
+  .search-form__text {
+    margin-right: 16px;
+  }
+
+  .search-form__short-films-button {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .search-form {
+    padding: 90px 14px 51px 14px;
+    max-width: 292px;
+    align-items: center;
+  }
+
+  .search-form__container {
+    padding-bottom: 15px;
+    margin-bottom: 41px;
+  }
+
+  .search-form__input {
+    font-size: 18px;
+    height: 22px;
+  }
+
+  .search-form__input::placeholder {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .search-form__text {
+    font-size: 11px;
+  }
+}

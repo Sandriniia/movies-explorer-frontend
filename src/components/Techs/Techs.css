@@ -1,0 +1,169 @@
+.techs {
+  margin: 0 auto;
+  padding: 100px 30px;
+  background-color: #272727;
+  color: #fff;
+}
+
+.techs__container {
+  margin: 0 auto;
+  max-width: 1140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.techs__title {
+  margin: 0;
+  margin-bottom: 23px;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 26px;
+  align-self: flex-start;
+}
+
+.techs__line {
+  border-bottom: 1px solid #dadada;
+  margin-bottom: 90px;
+  width: 100%;
+}
+
+.techs__box {
+  width: 100%;
+  max-width: 700px;
+}
+
+.techs__main-title {
+  margin: 0;
+  margin-bottom: 26px;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+}
+
+.techs__subtitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: 100px;
+}
+
+.techs__skill-box {
+  display: grid;
+  max-width: 690px;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+}
+
+.techs__skill-item {
+  max-width: 90px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: #303030;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.techs__skill-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+@media screen and (max-width: 767px) {
+  .techs {
+    padding: 90px 30px;
+  }
+
+  .techs__container {
+    max-width: 668px;
+  }
+
+  .techs__line {
+    margin-bottom: 80px;
+  }
+
+  .techs__main-title {
+    margin-bottom: 22px;
+  }
+
+  .techs__subtitle {
+    margin-bottom: 83px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .techs__skill-box {
+    max-width: 648px;
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    gap: 10px;
+  }
+
+  .techs__skill-item {
+    max-width: 84px;
+    height: 57px;
+  }
+
+  .techs__skill-text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__container {
+    max-width: 284px;
+  }
+
+  .techs__title {
+    margin-bottom: 28px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .techs__line {
+    border-bottom: 1px solid #000;
+    margin-bottom: 60px;
+  }
+
+  .techs__box {
+    max-width: 292px;
+  }
+
+  .techs__main-title {
+    margin-bottom: 24px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .techs__subtitle {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 50px;
+  }
+
+  .techs__skill-box {
+    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    align-items: center;
+    max-width: 178px;
+  }
+
+  .techs__skill-item {
+    max-width: 84px;
+    height: 57px;
+  }
+
+  .techs__skill-text {
+    font-size: 12px;
+    line-height: 14px;
+  }
+}

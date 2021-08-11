@@ -1,0 +1,42 @@
+.account-button__link {
+  padding: 0;
+  padding-bottom: 7px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.account-button__link:hover {
+  opacity: 0.5;
+}
+
+.account-button__link_active {
+  border-bottom: 2px solid #fff;
+}
+
+.account-button__link_logged {
+  color: #fff;
+  font-size: 14px;
+  line-height: 18px;
+  margin-right: 16px;
+  margin-left: 0;
+}
+
+.account-button__button {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background-color: #313131;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 319px) {
+  .account-button__link {
+    font-size: 10px;
+  }
+}
