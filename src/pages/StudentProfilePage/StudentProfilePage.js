@@ -6,16 +6,20 @@ import AboutProject from '../../components/AboutProject/AboutProject';
 import Techs from '../../components/Techs/Techs';
 import AboutMe from '../../components/AboutMe/AboutMe';
 import Portfolio from '../../components/Portfolio/Portfolio';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
-function StudentProfilePage() {
+function StudentProfilePage({ onAccountButton, isLogged }) {
   return (
     <div className='student-profile'>
+      <Header onAccountButton={onAccountButton} isLogged={isLogged} />
       <Promo />
       <NavTab />
       <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />
+      <Footer />
     </div>
   );
 }

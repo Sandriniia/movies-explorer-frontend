@@ -12,6 +12,7 @@ import Profile from '../../pages/Profile/Profile';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import NavigationPopup from '../../components/NavigationPopup/NavigationPopup';
 import * as auth from '../../utils/auth';
+import ProtectedRoute from '../../components/ProtectedRoute';
 
 function App() {
   const history = useHistory();
@@ -65,35 +66,45 @@ function App() {
   return (
     <div className='App'>
       <Switch>
-        <Route exact path='/'>
-          <Header onAccountButton={handleNavigationButtonClick} isLogged={isLogged} />
-          <StudentProfilePage />
-          <Footer />
-        </Route>
+        <Route
+          exact
+          path='/'
+          onAccountButton={handleNavigationButtonClick}
+          isLogged={isLogged}
+          component={StudentProfilePage}
+        />
         <Route path='/sign-up'>
           <Register onRegister={handleRegister} />
         </Route>
         <Route path='/sign-in'>
           <Login onLogin={handleLogin} />
         </Route>
-        <Route path='/movies'>
-          <Header onAccountButton={handleNavigationButtonClick} isLogged={isLogged} />
-          <Movies />
-          <Footer />
-        </Route>
-        <Route path='/saved-movies'>
-          <Header onAccountButton={handleNavigationButtonClick} isLogged={isLogged} />
-          <SavedMovies />
-          <Footer />
-        </Route>
-        <Route path='/profile'>
-          <Header onAccountButton={handleNavigationButtonClick} isLogged={isLogged} />
-          <Profile onLogout={onLogout} />
-        </Route>
+        <ProtectedRoute
+          path='/movies'
+          isLogged={isLogged}
+          onAccountButton={handleNavigationButtonClick}
+          component={Movies}
+        />
+        <ProtectedRoute
+          path='/saved-movies'
+          isLogged={isLogged}
+          onAccountButton={handleNavigationButtonClick}
+          component={SavedMovies}
+        />
+        <ProtectedRoute
+          path='/profile'
+          component={Profile}
+          isLogged={isLogged}
+          onAccountButton={handleNavigationButtonClick}
+          onLogout={onLogout}
+        />
         <Route path='/not-found'>
           <NotFoundPage />
         </Route>
         <Redirect to='/not-found' />
+        <Route>
+          {isLogged ? <Redirect to='/movies'></Redirect> : <Redirect to='/'></Redirect>}
+        </Route>
       </Switch>
       <NavigationPopup isOpen={isNavigationPopupOpen} onClose={closePopup} />
     </div>
