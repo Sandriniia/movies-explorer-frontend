@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import './App.css';
-import Header from '../../components/Header/Header';
 import StudentProfilePage from '../../pages/StudentProfilePage/StudentProfilePage';
-import Footer from '../../components/Footer/Footer';
 import Register from '../../pages/Register/Register';
 import Login from '../../pages/Login/Login';
 import Movies from '../../pages/Movies/Movies';

@@ -8,9 +8,12 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../../components/MoviesCard/MoviesCard';
-import data from '../../utils/data.json';
+// import data from '../../utils/data.json';
+import useFetchMoviesData from '../../utils/MoviesApi';
 
 function MoviesCardList() {
+  const { data, isLoading, error } = useFetchMoviesData();
+
   return (
     <div className='movies-list'>
       <div className='movies-list__container'>
@@ -18,9 +21,9 @@ function MoviesCardList() {
           return (
             <MoviesCard
               key={movie.id}
-              title={movie.title}
+              title={movie.nameRU}
               duration={movie.duration}
-              image={movie.image}
+              image={`https://api.nomoreparties.co${movie.image.url}`}
             />
           );
         })}
