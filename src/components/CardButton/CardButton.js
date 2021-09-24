@@ -5,46 +5,22 @@ import saved from '../../images/saved.png';
 import not_saved from '../../images/not-saved.png';
 import delete_button from '../../images/delete-button.png';
 import { SavedMoviesContext } from '../../pages/SavedMovies/SavedMovies';
-import { MoviesContext } from '../../utils/MoviesApi';
-import MoviesCard from '../MoviesCard/MoviesCard';
 
-function CardButton({
-  buttonId,
-  onSaveMovie,
-  onDeleteMovie,
-  movie,
-  savedMovie,
-  buttonSaveId,
-  isLiked,
-}) {
+function CardButton({ onSaveMovie, onDeleteMovie, movie, savedMovie, isLiked }) {
   const savedMovContext = useContext(SavedMoviesContext);
-  const MovContext = useContext(MoviesContext);
 
   const saveMovieArr = savedMovContext.map((movie) => {
     return movie;
   });
 
-  const movieIdArr = MovContext.map((movie) => {
-    return movie.id;
-  });
-
   const location = useLocation();
   const [path, setPath] = useState(location.pathname);
-  const [isLike, setIsLiked] = useState(false);
 
   useEffect(() => {
     setPath(location.pathname);
   }, [location]);
 
   const handleSaveButtonClick = () => {
-    setIsLiked((prevState) => {
-      return !prevState;
-    });
-    // console.log(buttonId);
-    // const like = MovContext.some((m) => m.id === buttonId);
-    // console.log(like);
-    // console.log(movie);
-
     !isLiked ? onSaveMovie(movie) : onDeleteMovie(saveMovieArr.find((m) => m.movieId === movie.id));
   };
 

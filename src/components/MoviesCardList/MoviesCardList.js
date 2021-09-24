@@ -1,10 +1,3 @@
-//  компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством.
-//  На странице поиска при отправке формы поиска делается запрос на Beatfilm api
-// получаем все данные с сервера и после этого фильтруем и отображаем результат.
-// Все полученные данные сохраняются в переменной и обновляются в хранилище
-// При нажатии кнопки сохранить отправляется запрос к movies нашего api
-// При повторном нажатии этой кнопки, фильм удаляется
-
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
 import './MoviesCardList.css';
@@ -37,7 +30,6 @@ function MoviesCardList({ onSaveMovie, onDeleteMovie, savedMovies }) {
                   onDeleteMovie={onDeleteMovie}
                   onSaveMovie={onSaveMovie}
                   key={movie.id}
-                  buttonId={movie.id}
                   title={movie.nameRU}
                   duration={movie.duration}
                   movie={movie}
@@ -54,7 +46,7 @@ function MoviesCardList({ onSaveMovie, onDeleteMovie, savedMovies }) {
               return (
                 <MoviesCard
                   onDeleteMovie={onDeleteMovie}
-                  key={savedMovie.id}
+                  key={savedMovie.movieId}
                   title={savedMovie.nameRU}
                   duration={savedMovie.duration}
                   savedMovie={savedMovie}

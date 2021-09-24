@@ -14,16 +14,13 @@ import ProtectedRoute from '../../components/ProtectedRoute';
 import api from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { SavedMoviesContext } from '../../pages/SavedMovies/SavedMovies';
-import { MoviesContext } from '../../utils/MoviesApi';
 
 import useFetchMoviesData from '../../utils/MoviesApi';
 
 function App() {
-  const { data } = useFetchMoviesData();
   const history = useHistory();
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
@@ -39,12 +36,11 @@ function App() {
     return auth
       .register(email, password, name)
       .then(() => {
-        setIsSuccess(true);
         history.push('/movies');
         setIsLogged(true);
       })
-      .catch(() => {
-        setIsSuccess(false);
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -131,57 +127,55 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <SavedMoviesContext.Provider value={savedMovies}>
-        <MoviesContext.Provider value={data}>
-          <div className='App'>
-            <Switch>
-              <Route
-                exact
-                path='/'
-                onAccountButton={handleNavigationButtonClick}
-                isLogged={isLogged}
-                component={StudentProfilePage}
-              />
-              <Route path='/sign-up'>
-                <Register onRegister={handleRegister} />
-              </Route>
-              <Route path='/sign-in'>
-                <Login onLogin={handleLogin} />
-              </Route>
-              <ProtectedRoute
-                path='/movies'
-                isLogged={isLogged}
-                onAccountButton={handleNavigationButtonClick}
-                component={Movies}
-                onSaveMovie={handleSaveMovie}
-                onDeleteMovie={handleDeleteMovie}
-                savedMovies={savedMovies}
-              />
-              <ProtectedRoute
-                path='/saved-movies'
-                isLogged={isLogged}
-                onAccountButton={handleNavigationButtonClick}
-                component={SavedMovies}
-                savedMovies={savedMovies}
-                onDeleteMovie={handleDeleteMovie}
-              />
-              <ProtectedRoute
-                path='/profile'
-                component={Profile}
-                isLogged={isLogged}
-                onAccountButton={handleNavigationButtonClick}
-                onLogout={onLogout}
-              />
-              <Route path='/not-found'>
-                <NotFoundPage />
-              </Route>
-              <Redirect to='/not-found' />
-              <Route>
-                {isLogged ? <Redirect to='/movies'></Redirect> : <Redirect to='/'></Redirect>}
-              </Route>
-            </Switch>
-            <NavigationPopup isOpen={isNavigationPopupOpen} onClose={closePopup} />
-          </div>
-        </MoviesContext.Provider>
+        <div className='App'>
+          <Switch>
+            <Route
+              exact
+              path='/'
+              onAccountButton={handleNavigationButtonClick}
+              isLogged={isLogged}
+              component={StudentProfilePage}
+            />
+            <Route path='/sign-up'>
+              <Register onRegister={handleRegister} />
+            </Route>
+            <Route path='/sign-in'>
+              <Login onLogin={handleLogin} />
+            </Route>
+            <ProtectedRoute
+              path='/movies'
+              isLogged={isLogged}
+              onAccountButton={handleNavigationButtonClick}
+              component={Movies}
+              onSaveMovie={handleSaveMovie}
+              onDeleteMovie={handleDeleteMovie}
+              savedMovies={savedMovies}
+            />
+            <ProtectedRoute
+              path='/saved-movies'
+              isLogged={isLogged}
+              onAccountButton={handleNavigationButtonClick}
+              component={SavedMovies}
+              savedMovies={savedMovies}
+              onDeleteMovie={handleDeleteMovie}
+            />
+            <ProtectedRoute
+              path='/profile'
+              component={Profile}
+              isLogged={isLogged}
+              onAccountButton={handleNavigationButtonClick}
+              onLogout={onLogout}
+            />
+            <Route path='/not-found'>
+              <NotFoundPage />
+            </Route>
+            <Redirect to='/not-found' />
+            <Route>
+              {isLogged ? <Redirect to='/movies'></Redirect> : <Redirect to='/'></Redirect>}
+            </Route>
+          </Switch>
+          <NavigationPopup isOpen={isNavigationPopupOpen} onClose={closePopup} />
+        </div>
       </SavedMoviesContext.Provider>
     </CurrentUserContext.Provider>
   );

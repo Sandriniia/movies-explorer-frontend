@@ -1,6 +1,4 @@
-import { useEffect, useState, createContext } from 'react';
-
-export const MoviesContext = createContext();
+import { useEffect, useState } from 'react';
 
 const useFetchMoviesData = () => {
   const [error, setError] = useState(null);

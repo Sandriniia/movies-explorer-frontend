@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './MoviesCard.css';
 import CardButton from '../../components/CardButton/CardButton';
 
@@ -6,8 +6,6 @@ function MoviesCard({
   title,
   duration,
   image,
-  buttonId,
-  buttonSaveId,
   onSaveMovie,
   onDeleteMovie,
   movie,
@@ -21,12 +19,10 @@ function MoviesCard({
         <div className='movie__box'>
           <h1 className='movie__title'>{title}</h1>
           <CardButton
-            buttonId={buttonId}
             onSaveMovie={onSaveMovie}
             onDeleteMovie={onDeleteMovie}
             movie={movie}
             savedMovie={savedMovie}
-            buttonSaveId={buttonSaveId}
             isLiked={isLiked}
           />
         </div>
