@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import './App.css';
 import StudentProfilePage from '../../pages/StudentProfilePage/StudentProfilePage';
@@ -11,12 +11,21 @@ import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import NavigationPopup from '../../components/NavigationPopup/NavigationPopup';
 import * as auth from '../../utils/auth';
 import ProtectedRoute from '../../components/ProtectedRoute';
+import api from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { SavedMoviesContext } from '../../pages/SavedMovies/SavedMovies';
+import { MoviesContext } from '../../utils/MoviesApi';
+
+import useFetchMoviesData from '../../utils/MoviesApi';
 
 function App() {
+  const { data } = useFetchMoviesData();
   const history = useHistory();
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
 
   function handleNavigationButtonClick() {
     setIsNavigationPopupOpen(true);
@@ -55,57 +64,126 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  const checkToken = useCallback(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      api
+        .getCurrentUserData(token)
+        .then((res) => {
+          if (res) {
+            setIsLogged(true);
+            history.push('/movies');
+          }
+        })
+        .catch(() => {
+          history.push('/');
+        });
+    }
+  }, [history]);
+
+  useEffect(() => {
+    checkToken();
+  }, [checkToken]);
+
+  useEffect(() => {
+    if (isLogged) {
+      api
+        .getCurrentUserData()
+        .then((data) => {
+          setCurrentUser(data);
+        })
+        .catch((err) => console.log(err));
+
+      api
+        .getSavedMovies()
+        .then((movies) => {
+          setSavedMovies(movies);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [isLogged]);
+
   function onLogout() {
     localStorage.removeItem('token');
     setIsLogged(false);
     history.push('/');
   }
 
+  const handleSaveMovie = (movie) => {
+    api
+      .saveMovie(movie)
+      .then((newMovie) => {
+        setSavedMovies([newMovie, ...savedMovies]);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleDeleteMovie = (movie) => {
+    api
+      .deleteMovie(movie._id)
+      .then(() => {
+        const newMovies = savedMovies.filter((m) => m._id !== movie._id);
+        setSavedMovies(newMovies);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div className='App'>
-      <Switch>
-        <Route
-          exact
-          path='/'
-          onAccountButton={handleNavigationButtonClick}
-          isLogged={isLogged}
-          component={StudentProfilePage}
-        />
-        <Route path='/sign-up'>
-          <Register onRegister={handleRegister} />
-        </Route>
-        <Route path='/sign-in'>
-          <Login onLogin={handleLogin} />
-        </Route>
-        <ProtectedRoute
-          path='/movies'
-          isLogged={isLogged}
-          onAccountButton={handleNavigationButtonClick}
-          component={Movies}
-        />
-        <ProtectedRoute
-          path='/saved-movies'
-          isLogged={isLogged}
-          onAccountButton={handleNavigationButtonClick}
-          component={SavedMovies}
-        />
-        <ProtectedRoute
-          path='/profile'
-          component={Profile}
-          isLogged={isLogged}
-          onAccountButton={handleNavigationButtonClick}
-          onLogout={onLogout}
-        />
-        <Route path='/not-found'>
-          <NotFoundPage />
-        </Route>
-        <Redirect to='/not-found' />
-        <Route>
-          {isLogged ? <Redirect to='/movies'></Redirect> : <Redirect to='/'></Redirect>}
-        </Route>
-      </Switch>
-      <NavigationPopup isOpen={isNavigationPopupOpen} onClose={closePopup} />
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <SavedMoviesContext.Provider value={savedMovies}>
+        <MoviesContext.Provider value={data}>
+          <div className='App'>
+            <Switch>
+              <Route
+                exact
+                path='/'
+                onAccountButton={handleNavigationButtonClick}
+                isLogged={isLogged}
+                component={StudentProfilePage}
+              />
+              <Route path='/sign-up'>
+                <Register onRegister={handleRegister} />
+              </Route>
+              <Route path='/sign-in'>
+                <Login onLogin={handleLogin} />
+              </Route>
+              <ProtectedRoute
+                path='/movies'
+                isLogged={isLogged}
+                onAccountButton={handleNavigationButtonClick}
+                component={Movies}
+                onSaveMovie={handleSaveMovie}
+                onDeleteMovie={handleDeleteMovie}
+                savedMovies={savedMovies}
+              />
+              <ProtectedRoute
+                path='/saved-movies'
+                isLogged={isLogged}
+                onAccountButton={handleNavigationButtonClick}
+                component={SavedMovies}
+                savedMovies={savedMovies}
+                onDeleteMovie={handleDeleteMovie}
+              />
+              <ProtectedRoute
+                path='/profile'
+                component={Profile}
+                isLogged={isLogged}
+                onAccountButton={handleNavigationButtonClick}
+                onLogout={onLogout}
+              />
+              <Route path='/not-found'>
+                <NotFoundPage />
+              </Route>
+              <Redirect to='/not-found' />
+              <Route>
+                {isLogged ? <Redirect to='/movies'></Redirect> : <Redirect to='/'></Redirect>}
+              </Route>
+            </Switch>
+            <NavigationPopup isOpen={isNavigationPopupOpen} onClose={closePopup} />
+          </div>
+        </MoviesContext.Provider>
+      </SavedMoviesContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 
