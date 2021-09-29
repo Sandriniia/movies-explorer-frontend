@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
@@ -8,20 +8,6 @@ import logo from '../../images/logo.png';
 function Login({ onLogin }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
   const history = useHistory();
-  console.log(errors);
-  // const loginData = {
-  //   email: '',
-  //   password: '',
-  // };
-  // const [data, setData] = useState(loginData);
-
-  // function handleChange(event) {
-  //   const { name, value } = event.target;
-  //   setData((data) => ({
-  //     ...data,
-  //     [name]: value,
-  //   }));
-  // }
 
   function handleSubmit(event) {
     event.preventDefault();
