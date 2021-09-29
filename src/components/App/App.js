@@ -58,6 +58,23 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  const updateCurrentUserData = (data) => {
+    api
+      .updateUserData(data)
+      .then((res) => {
+        if (!res || res.status === 400) {
+          return 'Что то пошло не так';
+        }
+      })
+      .catch((err) => console.log(err));
+    api
+      .getCurrentUserData()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const checkToken = useCallback(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -163,6 +180,7 @@ function App() {
               isLogged={isLogged}
               onAccountButton={handleNavigationButtonClick}
               onLogout={onLogout}
+              onUpdate={updateCurrentUserData}
             />
             <Route path='/not-found'>
               <NotFoundPage />
