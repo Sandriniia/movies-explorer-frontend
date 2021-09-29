@@ -15,8 +15,6 @@ import api from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { SavedMoviesContext } from '../../pages/SavedMovies/SavedMovies';
 
-import useFetchMoviesData from '../../utils/MoviesApi';
-
 function App() {
   const history = useHistory();
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = useState(false);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SearchForm.css';
+import useFetchMoviesData from '../../utils/MoviesApi';
 import search_button from '../../images/find.png';
 import short_films_on from '../../images/short-films-on.png';
 import short_films_off from '../../images/short-films-off.png';
@@ -10,6 +11,10 @@ function SearchForm() {
   const handleShortFilmsButtonClick = () => {
     setIsButtonOn(!isButtonOn);
   };
+
+  // const { data, isLoading, error } = useFetchMoviesData();
+
+  const handleGetMovies = () => {};
   return (
     <section className='search-form'>
       <div className='search-form__container'>

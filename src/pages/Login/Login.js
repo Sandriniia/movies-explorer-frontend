@@ -1,29 +1,37 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 import './Login.css';
 import logo from '../../images/logo.png';
 
 function Login({ onLogin }) {
-  const loginData = {
-    email: '',
-    password: '',
-  };
-  const [data, setData] = useState(loginData);
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+  const history = useHistory();
+  console.log(errors);
+  // const loginData = {
+  //   email: '',
+  //   password: '',
+  // };
+  // const [data, setData] = useState(loginData);
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setData((data) => ({
-      ...data,
-      [name]: value,
-    }));
-  }
+  // function handleChange(event) {
+  //   const { name, value } = event.target;
+  //   setData((data) => ({
+  //     ...data,
+  //     [name]: value,
+  //   }));
+  // }
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (!data.email || !data.password) {
+    if (!isValid) {
       return;
     }
-    onLogin(data);
+    onLogin(values)
+      .then(() => resetForm())
+      .then(() => history.push('/movies'))
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -38,24 +46,30 @@ function Login({ onLogin }) {
         <p className='login__text'>E-mail</p>
         <input
           id='email'
-          value={data.email}
+          value={values.email}
           type='email'
           name='email'
           required
           className='login__input'
           onChange={handleChange}
         ></input>
+        <p className='register__error-text'>{errors.email}</p>
         <p className='login__text'>Пароль</p>
         <input
           id='password'
-          value={data.password}
+          value={values.password}
           type='password'
           name='password'
           required
           className='login__input'
           onChange={handleChange}
         ></input>
-        <button type='submit' className='login__button'>
+        <p className='register__error-text'>{errors.password}</p>
+        <button
+          type='submit'
+          className={`login__button ${!isValid ? 'register__button_disabled' : ''}`}
+          disabled={!isValid}
+        >
           Войти
         </button>
         <div className='login__question-box'>

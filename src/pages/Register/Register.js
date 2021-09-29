@@ -1,31 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Register.css';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 import logo from '../../images/logo.png';
 
 function Register({ onRegister }) {
-  const registerData = {
-    email: '',
-    password: '',
-    name: '',
-  };
-
-  const [data, setData] = useState(registerData);
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setData((data) => ({
-      ...data,
-      [name]: value,
-    }));
-  }
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (!data.email || !data.password || !data.name) {
+    if (!isValid) {
       return;
     }
-    onRegister(data);
+    onRegister(values);
+    resetForm();
   }
 
   return (
@@ -40,34 +28,43 @@ function Register({ onRegister }) {
         <p className='register__text'>Имя</p>
         <input
           id='name'
-          value={data.name || ''}
+          value={values.name || ''}
           type='text'
           name='name'
           required
+          minLength='2'
           className='register__input'
           onChange={handleChange}
         ></input>
+        <p className='register__error-text'>{errors.name}</p>
         <p className='register__text'>E-mail</p>
         <input
           id='email'
-          value={data.email || ''}
+          value={values.email || ''}
           type='email'
           name='email'
           required
           className='register__input'
           onChange={handleChange}
         />
+        <p className='register__error-text'>{errors.email}</p>
         <p className='register__text'>Пароль</p>
         <input
           id='password'
-          value={data.password || ''}
+          value={values.password || ''}
           type='password'
           name='password'
           required
+          minLength='8'
           className='register__input'
           onChange={handleChange}
         ></input>
-        <button type='submit' className='register__button'>
+        <p className='register__error-text'>{errors.password}</p>
+        <button
+          className={`register__button ${!isValid ? 'register__button_disabled' : ''}`}
+          type='submit'
+          disabled={!isValid}
+        >
           Зарегистрироваться
         </button>
         <div className='register__question-box'>
