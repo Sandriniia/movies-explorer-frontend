@@ -1,30 +1,38 @@
 import React, { useState } from 'react';
 import './SearchForm.css';
-import useFetchMoviesData from '../../utils/MoviesApi';
 import search_button from '../../images/find.png';
 import short_films_on from '../../images/short-films-on.png';
 import short_films_off from '../../images/short-films-off.png';
 
-function SearchForm() {
+function SearchForm({ onGetMovies }) {
   const [isButtonOn, setIsButtonOn] = useState(false);
+  const [filterData, setFilterData] = useState('');
 
   const handleShortFilmsButtonClick = () => {
     setIsButtonOn(!isButtonOn);
   };
 
-  // const { data, isLoading, error } = useFetchMoviesData();
+  const handleChange = (event) => {
+    setFilterData(event.target.value);
+  };
 
-  const handleGetMovies = () => {};
+  const getFilterMovies = (event) => {
+    event.preventDefault();
+    onGetMovies(filterData);
+  };
+
   return (
     <section className='search-form'>
       <div className='search-form__container'>
-        <form className='search-form__form'>
+        <form className='search-form__form' onSubmit={getFilterMovies}>
           <input
             className='search-form__input'
             type='text'
             autoFocus
             placeholder='Фильм'
             required
+            value={filterData}
+            onChange={handleChange}
           />
           <button type='submit' className='search-form__button'>
             <img src={search_button} alt='loupe icon' className='search-form__icon' />

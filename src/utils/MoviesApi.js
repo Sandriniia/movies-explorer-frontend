@@ -1,28 +1,20 @@
-import { useEffect, useState } from 'react';
+class MoviesApi {
+  constructor(baseUrl) {
+    this._baseUrl = baseUrl;
+  }
 
-const useFetchMoviesData = () => {
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+  _getResponseData(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(new Error(`Ошибка ${res.status}`));
+  }
 
-  useEffect(() => {
-    fetch('https://api.nomoreparties.co/beatfilm-movies')
-      .then((res) => res.json())
-      .then((result) => {
-        setData(result);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        setError(error.message);
-      });
-  }, []);
+  getMovies() {
+    return fetch(`${this._baseUrl}`).then(this._getResponseData);
+  }
+}
 
-  return {
-    data,
-    isLoading,
-    error,
-  };
-};
+const movies_api = new MoviesApi('https://api.nomoreparties.co/beatfilm-movies');
 
-export default useFetchMoviesData;
+export default movies_api;

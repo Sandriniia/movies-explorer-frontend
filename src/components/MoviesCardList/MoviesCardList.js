@@ -2,11 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
 import './MoviesCardList.css';
 import MoviesCard from '../../components/MoviesCard/MoviesCard';
-import useFetchMoviesData from '../../utils/MoviesApi';
+import Loading from '../../components/Loading/Loading';
 
-function MoviesCardList({ onSaveMovie, onDeleteMovie, savedMovies }) {
-  const { data, isLoading, error } = useFetchMoviesData();
-
+function MoviesCardList({
+  onSaveMovie,
+  onDeleteMovie,
+  savedMovies,
+  movies,
+  isLoading,
+  error,
+  isEmpty,
+}) {
   const location = useLocation();
   const [path, setPath] = useState(location.pathname);
 
@@ -19,12 +25,29 @@ function MoviesCardList({ onSaveMovie, onDeleteMovie, savedMovies }) {
     return savedMoviesIds.includes(movieId);
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isEmpty) {
+    return <p>Ничего не найдено.</p>;
+  }
+
+  if (error) {
+    return (
+      <p>
+        Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен.
+        Подождите немного и попробуйте ещё раз
+      </p>
+    );
+  }
+
   return (
     <div className='movies-list'>
       <div className='movies-list__container'>
         {path === '/movies' && (
           <>
-            {data?.map((movie) => {
+            {movies?.map((movie) => {
               return (
                 <MoviesCard
                   onDeleteMovie={onDeleteMovie}
@@ -57,9 +80,11 @@ function MoviesCardList({ onSaveMovie, onDeleteMovie, savedMovies }) {
           </>
         )}
       </div>
-      <button type='submit' className='movies-list__button'>
-        Еще
-      </button>
+      {path === '/movies' && movies.length > 0 && (
+        <button type='submit' className='movies-list__button'>
+          Еще
+        </button>
+      )}
     </div>
   );
 }
