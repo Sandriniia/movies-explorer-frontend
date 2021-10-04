@@ -14,9 +14,11 @@ import ProtectedRoute from '../../components/ProtectedRoute';
 import api from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { SavedMoviesContext } from '../../pages/SavedMovies/SavedMovies';
+import useCurrentWidth from '../../hooks/useCurrentWidth';
 
 function App() {
   const history = useHistory();
+  const width = useCurrentWidth();
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLogged, setIsLogged] = useState(false);
@@ -165,6 +167,7 @@ function App() {
               onSaveMovie={handleSaveMovie}
               onDeleteMovie={handleDeleteMovie}
               savedMovies={savedMovies}
+              width={width}
             />
             <ProtectedRoute
               path='/saved-movies'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Movies.css';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
@@ -6,22 +6,40 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import movies_api from '../../utils/MoviesApi';
 
-function Movies({ onAccountButton, isLogged, onSaveMovie, onDeleteMovie, savedMovies }) {
+function Movies({ onAccountButton, isLogged, onSaveMovie, onDeleteMovie, savedMovies, width }) {
   const [movies, setMovies] = useState([]);
+  const [moviesNumber, setMoviesNumber] = useState(null);
+  const [indexMovie, setIndexMovie] = useState(null);
   const [limitMovies, setLimitMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [error, setError] = useState(null);
 
-  const removeMovies = () => {
+  useEffect(() => {
+    if (width >= 1215) {
+      setMoviesNumber(16);
+      setIndexMovie(3);
+    } else if (width >= 925) {
+      setMoviesNumber(12);
+      setIndexMovie(2);
+    } else if (width >= 625) {
+      setMoviesNumber(8);
+      setIndexMovie(1);
+    } else if (width < 625) {
+      setMoviesNumber(5);
+      setIndexMovie(0);
+    }
+  }, [width]);
+
+  const addAndRemoveMovies = () => {
     let l = [];
     limitMovies.filter((m, i) => {
-      if (i <= 3) {
+      if (i <= indexMovie) {
         l.push(m);
         setMovies([...movies, ...l]);
       }
     });
-    limitMovies.splice(0, 4);
+    limitMovies.splice(0, indexMovie + 1);
     setLimitMovies(limitMovies);
   };
 
@@ -41,18 +59,18 @@ function Movies({ onAccountButton, isLogged, onSaveMovie, onDeleteMovie, savedMo
       .then((filteredMov) => {
         if (filteredMov.length === 0) {
           setIsEmpty(true);
-        } else if (filteredMov.length <= 16) {
+        } else if (filteredMov.length <= moviesNumber) {
           setIsEmpty(false);
           setLimitMovies([]);
           setMovies(filteredMov);
-        } else if (filteredMov.length > 16) {
+        } else if (filteredMov.length > moviesNumber) {
           setIsEmpty(false);
           let limit = [];
           setMovies(
             filteredMov.filter((m, i) => {
-              if (i <= 15) {
+              if (i <= moviesNumber - 1) {
                 return m;
-              } else if (i > 15) {
+              } else if (i > moviesNumber - 1) {
                 limit.push(m);
                 setLimitMovies(limit);
               }
@@ -79,7 +97,7 @@ function Movies({ onAccountButton, isLogged, onSaveMovie, onDeleteMovie, savedMo
         error={error}
         isEmpty={isEmpty}
         limitMovies={limitMovies}
-        onRemoveMovies={removeMovies}
+        onRemoveMovies={addAndRemoveMovies}
       />
       <Footer />
     </div>
