@@ -8,9 +8,22 @@ import movies_api from '../../utils/MoviesApi';
 
 function Movies({ onAccountButton, isLogged, onSaveMovie, onDeleteMovie, savedMovies }) {
   const [movies, setMovies] = useState([]);
+  const [limitMovies, setLimitMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [error, setError] = useState(null);
+
+  const removeMovies = () => {
+    let l = [];
+    limitMovies.filter((m, i) => {
+      if (i <= 3) {
+        l.push(m);
+        setMovies([...movies, ...l]);
+      }
+    });
+    limitMovies.splice(0, 4);
+    setLimitMovies(limitMovies);
+  };
 
   function handleGetMovies(filterData) {
     movies_api
@@ -28,10 +41,26 @@ function Movies({ onAccountButton, isLogged, onSaveMovie, onDeleteMovie, savedMo
       .then((filteredMov) => {
         if (filteredMov.length === 0) {
           setIsEmpty(true);
+        } else if (filteredMov.length <= 16) {
+          setIsEmpty(false);
+          setLimitMovies([]);
+          setMovies(filteredMov);
+        } else if (filteredMov.length > 16) {
+          setIsEmpty(false);
+          let limit = [];
+          setMovies(
+            filteredMov.filter((m, i) => {
+              if (i <= 15) {
+                return m;
+              } else if (i > 15) {
+                limit.push(m);
+                setLimitMovies(limit);
+              }
+            }),
+          );
         } else {
           setIsEmpty(false);
         }
-        setMovies(filteredMov);
         setIsLoading(false);
       })
       .catch((err) => setError(err));
@@ -49,6 +78,8 @@ function Movies({ onAccountButton, isLogged, onSaveMovie, onDeleteMovie, savedMo
         isLoading={isLoading}
         error={error}
         isEmpty={isEmpty}
+        limitMovies={limitMovies}
+        onRemoveMovies={removeMovies}
       />
       <Footer />
     </div>

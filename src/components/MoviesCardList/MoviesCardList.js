@@ -12,6 +12,8 @@ function MoviesCardList({
   isLoading,
   error,
   isEmpty,
+  limitMovies,
+  onRemoveMovies,
 }) {
   const location = useLocation();
   const [path, setPath] = useState(location.pathname);
@@ -80,8 +82,8 @@ function MoviesCardList({
           </>
         )}
       </div>
-      {path === '/movies' && movies.length > 0 && (
-        <button type='submit' className='movies-list__button'>
+      {path === '/movies' && limitMovies.length > 0 && (
+        <button onClick={onRemoveMovies} type='submit' className='movies-list__button'>
           Еще
         </button>
       )}
