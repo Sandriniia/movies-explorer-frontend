@@ -11,10 +11,13 @@ function MoviesCard({
   movie,
   savedMovie,
   isLiked,
+  trailer,
 }) {
   return (
     <div className='movie'>
-      <img src={image} alt='Movie poster' className='movie__image' />
+      <a href={trailer} target='_blank' rel='noreferrer'>
+        <img src={image} alt='Movie poster' className='movie__image' />
+      </a>
       <div className='movie__text-container'>
         <div className='movie__box'>
           <h1 className='movie__title'>{title}</h1>

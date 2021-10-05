@@ -14,9 +14,13 @@ function MoviesCardList({
   isEmpty,
   limitMovies,
   onRemoveMovies,
+  filteredSavedMovies,
+  isFilteredSavedMoviesEmpty,
 }) {
   const location = useLocation();
   const [path, setPath] = useState(location.pathname);
+
+  console.log(savedMovies);
 
   useEffect(() => {
     setPath(location.pathname);
@@ -44,6 +48,10 @@ function MoviesCardList({
     );
   }
 
+  if (isFilteredSavedMoviesEmpty) {
+    return <p>Совпадений нет.</p>;
+  }
+
   return (
     <div className='movies-list'>
       <div className='movies-list__container'>
@@ -59,15 +67,34 @@ function MoviesCardList({
                   duration={movie.duration}
                   movie={movie}
                   isLiked={getIsLiked(movie.id)}
+                  trailer={movie.trailerLink}
                   image={`https://api.nomoreparties.co${movie.image.url}`}
                 />
               );
             })}
           </>
         )}
-        {path === '/saved-movies' && (
+        {path === '/saved-movies' &&
+        filteredSavedMovies.length === 0 &&
+        !isFilteredSavedMoviesEmpty ? (
           <>
             {savedMovies?.map((savedMovie) => {
+              return (
+                <MoviesCard
+                  onDeleteMovie={onDeleteMovie}
+                  key={savedMovie.movieId}
+                  title={savedMovie.nameRU}
+                  duration={savedMovie.duration}
+                  savedMovie={savedMovie}
+                  image={savedMovie.thumbnail}
+                  trailer={savedMovie.trailer}
+                />
+              );
+            })}
+          </>
+        ) : (
+          <>
+            {filteredSavedMovies?.map((savedMovie) => {
               return (
                 <MoviesCard
                   onDeleteMovie={onDeleteMovie}

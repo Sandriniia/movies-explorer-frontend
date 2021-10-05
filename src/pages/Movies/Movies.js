@@ -6,7 +6,15 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import movies_api from '../../utils/MoviesApi';
 
-function Movies({ onAccountButton, isLogged, onSaveMovie, onDeleteMovie, savedMovies, width }) {
+function Movies({
+  onAccountButton,
+  isLogged,
+  onSaveMovie,
+  onDeleteMovie,
+  savedMovies,
+  width,
+  isShortFilmsButtonOn,
+}) {
   const [movies, setMovies] = useState([]);
   const [moviesNumber, setMoviesNumber] = useState(null);
   const [indexMovie, setIndexMovie] = useState(null);
@@ -53,6 +61,11 @@ function Movies({ onAccountButton, isLogged, onSaveMovie, onDeleteMovie, savedMo
       })
       .then((movies) => {
         return movies.filter((movie) => {
+          if (isShortFilmsButtonOn) {
+            return (
+              movie?.nameRU.toLowerCase().includes(filterData.toLowerCase()) && movie.duration <= 40
+            );
+          }
           return movie?.nameRU.toLowerCase().includes(filterData.toLowerCase());
         });
       })

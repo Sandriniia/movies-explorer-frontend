@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
 import './SearchForm.css';
 import search_button from '../../images/find.png';
-import short_films_on from '../../images/short-films-on.png';
-import short_films_off from '../../images/short-films-off.png';
+import FilterShortFilm from '../FilterCheckbox/FilterShortFilm';
 
-function SearchForm({ onGetMovies }) {
-  const [isButtonOn, setIsButtonOn] = useState(false);
+function SearchForm({ onGetMovies, onFilterSavedMovies }) {
+  const location = useLocation();
+
   const [filterData, setFilterData] = useState('');
+  const [path, setPath] = useState(location.pathname);
 
-  const handleShortFilmsButtonClick = () => {
-    setIsButtonOn(!isButtonOn);
-  };
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [location]);
 
   const handleChange = (event) => {
     setFilterData(event.target.value);
@@ -21,10 +23,18 @@ function SearchForm({ onGetMovies }) {
     onGetMovies(filterData);
   };
 
+  const getFilterSavedMovies = (event) => {
+    event.preventDefault();
+    onFilterSavedMovies(filterData);
+  };
+
   return (
     <section className='search-form'>
       <div className='search-form__container'>
-        <form className='search-form__form' onSubmit={getFilterMovies}>
+        <form
+          className='search-form__form'
+          onSubmit={path === '/movies' ? getFilterMovies : getFilterSavedMovies}
+        >
           <input
             className='search-form__input'
             type='text'
@@ -39,24 +49,7 @@ function SearchForm({ onGetMovies }) {
           </button>
         </form>
       </div>
-      <div className='search-form__short-films-box'>
-        <button className='search-form__short-films-button' onClick={handleShortFilmsButtonClick}>
-          {isButtonOn ? (
-            <img
-              src={short_films_on}
-              alt='Short films button on'
-              className='search-form__short-films-icon'
-            />
-          ) : (
-            <img
-              src={short_films_off}
-              alt='Short films button off'
-              className='search-form__short-films-icon'
-            />
-          )}
-        </button>
-        <p className='search-form__text'>Короткометражки</p>
-      </div>
+      <FilterShortFilm />
     </section>
   );
 }
