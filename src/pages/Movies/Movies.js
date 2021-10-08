@@ -77,24 +77,6 @@ function Movies({
     }
   };
 
-  // useEffect(() => {
-  //   if (movies.length !== 0) {
-  //     if (filteredMovies.length !== 0 && isShortFilmsButtonOn) {
-  //       filterByDuration();
-  //     } else if (filteredMovies.length !== 0 && !isShortFilmsButtonOn) {
-  //       filterByName(initialMovies, searchData);
-  //     }
-  //   }
-  // }, [
-  //   movies,
-  //   isShortFilmsButtonOn,
-  //   filteredMovies.length,
-  //   filterByDuration,
-  //   filterByName,
-  //   initialMovies,
-  //   searchData,
-  // ]);
-
   useEffect(() => {
     if (filteredMovies.length <= moviesNumber) {
       setLimitMovies([]);

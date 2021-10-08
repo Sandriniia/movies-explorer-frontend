@@ -16,7 +16,6 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { SavedMoviesContext } from '../../pages/SavedMovies/SavedMovies';
 import useCurrentWidth from '../../hooks/useCurrentWidth';
 import movies_api from '../../utils/MoviesApi';
-import useFilterMovies from '../../hooks/useFilterMovies';
 
 export const ShortFilmsContext = createContext();
 
@@ -30,7 +29,6 @@ function App() {
   const [isShortFilmsButtonOn, setIsShortFilmsButtonOn] = useState(false);
   const [error, setError] = useState(null);
   const [initialMovies, setInitialMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [searchData, setSearchData] = useState('');
 
   const handleChangeSearchData = (event) => {
@@ -179,18 +177,17 @@ function App() {
         <ShortFilmsContext.Provider value={shortFilmsValue}>
           <div className='App'>
             <Switch>
-              <Route
-                exact
-                path='/'
-                onAccountButton={handleNavigationButtonClick}
-                isLogged={isLogged}
-                component={StudentProfilePage}
-              />
               <Route path='/sign-up'>
                 <Register onRegister={handleRegister} />
               </Route>
               <Route path='/sign-in'>
                 <Login onLogin={handleLogin} />
+              </Route>
+              <Route exact path='/'>
+                <StudentProfilePage
+                  isLogged={isLogged}
+                  onAccountButton={handleNavigationButtonClick}
+                />
               </Route>
               <ProtectedRoute
                 path='/movies'
@@ -204,7 +201,6 @@ function App() {
                 isShortFilmsButtonOn={isShortFilmsButtonOn}
                 error={error}
                 initialMovies={initialMovies}
-                isLoading={isLoading}
                 onChangeSearchData={handleChangeSearchData}
                 searchData={searchData}
               />
@@ -216,7 +212,6 @@ function App() {
                 savedMovies={savedMovies}
                 onDeleteMovie={handleDeleteMovie}
                 isShortFilmsButtonOn={isShortFilmsButtonOn}
-                isLoading={isLoading}
                 onChangeSearchData={handleChangeSearchData}
                 searchData={searchData}
               />

@@ -13,14 +13,19 @@ function SavedMovies({
   onDeleteMovie,
   savedMovies,
   isShortFilmsButtonOn,
-  isLoading,
   onChangeSearchData,
   searchData,
 }) {
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
 
-  const { filteredMovies, filterByNameAndDuration, filterByName, filterByDuration, isEmpty } =
-    useFilterMovies();
+  const {
+    filteredMovies,
+    filterByNameAndDuration,
+    filterByName,
+    filterByDuration,
+    isEmpty,
+    isLoading,
+  } = useFilterMovies();
 
   const filterSavedMovies = () => {
     if (isShortFilmsButtonOn) {
@@ -56,6 +61,7 @@ function SavedMovies({
         savedMovies={savedMovies}
         filteredSavedMovies={filteredSavedMovies}
         isEmpty={isEmpty}
+        isLoading={isLoading}
       />
       <Footer />
     </>
