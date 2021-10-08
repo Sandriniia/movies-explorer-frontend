@@ -15,6 +15,8 @@ import api from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { SavedMoviesContext } from '../../pages/SavedMovies/SavedMovies';
 import useCurrentWidth from '../../hooks/useCurrentWidth';
+import movies_api from '../../utils/MoviesApi';
+import useFilterMovies from '../../hooks/useFilterMovies';
 
 export const ShortFilmsContext = createContext();
 
@@ -26,10 +28,28 @@ function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isShortFilmsButtonOn, setIsShortFilmsButtonOn] = useState(false);
+  const [error, setError] = useState(null);
+  const [initialMovies, setInitialMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchData, setSearchData] = useState('');
+
+  const handleChangeSearchData = (event) => {
+    setSearchData(event.target.value);
+  };
 
   const handleShortFilmsButtonClick = () => {
     setIsShortFilmsButtonOn((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    movies_api
+      .getMovies()
+      .then((movies) => {
+        setError(null);
+        setInitialMovies(movies);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const shortFilmsValue = {
     handleShortFilmsButtonClick,
@@ -182,6 +202,11 @@ function App() {
                 savedMovies={savedMovies}
                 width={width}
                 isShortFilmsButtonOn={isShortFilmsButtonOn}
+                error={error}
+                initialMovies={initialMovies}
+                isLoading={isLoading}
+                onChangeSearchData={handleChangeSearchData}
+                searchData={searchData}
               />
               <ProtectedRoute
                 path='/saved-movies'
@@ -191,6 +216,9 @@ function App() {
                 savedMovies={savedMovies}
                 onDeleteMovie={handleDeleteMovie}
                 isShortFilmsButtonOn={isShortFilmsButtonOn}
+                isLoading={isLoading}
+                onChangeSearchData={handleChangeSearchData}
+                searchData={searchData}
               />
               <ProtectedRoute
                 path='/profile'

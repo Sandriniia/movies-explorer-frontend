@@ -4,28 +4,28 @@ import './SearchForm.css';
 import search_button from '../../images/find.png';
 import FilterShortFilm from '../FilterCheckbox/FilterShortFilm';
 
-function SearchForm({ onGetMovies, onFilterSavedMovies }) {
+function SearchForm({
+  onFilterMovies,
+  onFilterSavedMovies,
+  onChangeSearchData,
+  searchData,
+  onShortFilmsFilter,
+}) {
   const location = useLocation();
-
-  const [filterData, setFilterData] = useState('');
   const [path, setPath] = useState(location.pathname);
 
   useEffect(() => {
     setPath(location.pathname);
   }, [location]);
 
-  const handleChange = (event) => {
-    setFilterData(event.target.value);
-  };
-
-  const getFilterMovies = (event) => {
+  function getFilterMovies(event) {
     event.preventDefault();
-    onGetMovies(filterData);
-  };
+    onFilterMovies();
+  }
 
   const getFilterSavedMovies = (event) => {
     event.preventDefault();
-    onFilterSavedMovies(filterData);
+    onFilterSavedMovies();
   };
 
   return (
@@ -41,15 +41,15 @@ function SearchForm({ onGetMovies, onFilterSavedMovies }) {
             autoFocus
             placeholder='Фильм'
             required
-            value={filterData}
-            onChange={handleChange}
+            value={searchData}
+            onChange={onChangeSearchData}
           />
           <button type='submit' className='search-form__button'>
             <img src={search_button} alt='loupe icon' className='search-form__icon' />
           </button>
         </form>
       </div>
-      <FilterShortFilm />
+      <FilterShortFilm onShortFilmsFilter={onShortFilmsFilter} />
     </section>
   );
 }

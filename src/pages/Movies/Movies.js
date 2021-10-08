@@ -4,7 +4,7 @@ import SearchForm from '../../components/SearchForm/SearchForm';
 import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import movies_api from '../../utils/MoviesApi';
+import useFilterMovies from '../../hooks/useFilterMovies';
 
 function Movies({
   onAccountButton,
@@ -14,14 +14,24 @@ function Movies({
   savedMovies,
   width,
   isShortFilmsButtonOn,
+  error,
+  initialMovies,
+  onChangeSearchData,
+  searchData,
 }) {
   const [movies, setMovies] = useState([]);
   const [moviesNumber, setMoviesNumber] = useState(null);
   const [indexMovie, setIndexMovie] = useState(null);
   const [limitMovies, setLimitMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [error, setError] = useState(null);
+
+  const {
+    filteredMovies,
+    filterByNameAndDuration,
+    filterByName,
+    filterByDuration,
+    isEmpty,
+    isLoading,
+  } = useFilterMovies();
 
   useEffect(() => {
     if (width >= 1215) {
@@ -51,64 +61,76 @@ function Movies({
     setLimitMovies(limitMovies);
   };
 
-  function handleGetMovies(filterData) {
-    movies_api
-      .getMovies()
-      .then((movies) => {
-        setIsLoading(true);
-        setError(null);
-        return movies;
-      })
-      .then((movies) => {
-        return movies.filter((movie) => {
-          if (isShortFilmsButtonOn) {
-            return (
-              movie?.nameRU.toLowerCase().includes(filterData.toLowerCase()) && movie.duration <= 40
-            );
-          }
-          return movie?.nameRU.toLowerCase().includes(filterData.toLowerCase());
-        });
-      })
-      .then((filteredMov) => {
-        if (filteredMov.length === 0) {
-          setIsEmpty(true);
-        } else if (filteredMov.length <= moviesNumber) {
-          setIsEmpty(false);
-          setLimitMovies([]);
-          setMovies(filteredMov);
-        } else if (filteredMov.length > moviesNumber) {
-          setIsEmpty(false);
-          let limit = [];
-          setMovies(
-            filteredMov.filter((m, i) => {
-              if (i <= moviesNumber - 1) {
-                return m;
-              } else if (i > moviesNumber - 1) {
-                limit.push(m);
-                setLimitMovies(limit);
-              }
-            }),
-          );
-        } else {
-          setIsEmpty(false);
-        }
-        setIsLoading(false);
-      })
-      .catch((err) => setError(err));
+  function handleFilterMovies() {
+    if (isShortFilmsButtonOn) {
+      filterByNameAndDuration(initialMovies, searchData);
+    } else {
+      filterByName(initialMovies, searchData);
+    }
   }
+
+  const shortFilmsFilter = () => {
+    if (filteredMovies.length !== 0 && !isShortFilmsButtonOn) {
+      filterByDuration();
+    } else if (filteredMovies.length !== 0 && isShortFilmsButtonOn) {
+      filterByName(initialMovies, searchData);
+    }
+  };
+
+  // useEffect(() => {
+  //   if (movies.length !== 0) {
+  //     if (filteredMovies.length !== 0 && isShortFilmsButtonOn) {
+  //       filterByDuration();
+  //     } else if (filteredMovies.length !== 0 && !isShortFilmsButtonOn) {
+  //       filterByName(initialMovies, searchData);
+  //     }
+  //   }
+  // }, [
+  //   movies,
+  //   isShortFilmsButtonOn,
+  //   filteredMovies.length,
+  //   filterByDuration,
+  //   filterByName,
+  //   initialMovies,
+  //   searchData,
+  // ]);
+
+  useEffect(() => {
+    if (filteredMovies.length <= moviesNumber) {
+      setLimitMovies([]);
+      setMovies(filteredMovies);
+    } else if (filteredMovies.length > moviesNumber) {
+      let limit = [];
+      setMovies(
+        filteredMovies.filter((m, i) => {
+          if (i <= moviesNumber - 1) {
+            return m;
+          } else if (i > moviesNumber - 1) {
+            limit.push(m);
+            setLimitMovies(limit);
+          }
+        }),
+      );
+    }
+  }, [filteredMovies, moviesNumber]);
 
   return (
     <div className='movies'>
       <Header onAccountButton={onAccountButton} isLogged={isLogged} />
-      <SearchForm onGetMovies={handleGetMovies} />
+      <SearchForm
+        onFilterMovies={handleFilterMovies}
+        onChangeSearchData={onChangeSearchData}
+        searchData={searchData}
+        onShortFilmsFilter={shortFilmsFilter}
+      />
       <MoviesCardList
         onSaveMovie={onSaveMovie}
         onDeleteMovie={onDeleteMovie}
         savedMovies={savedMovies}
         movies={movies}
-        isLoading={isLoading}
         error={error}
         isEmpty={isEmpty}
+        isLoading={isLoading}
         limitMovies={limitMovies}
         onRemoveMovies={addAndRemoveMovies}
       />

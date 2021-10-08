@@ -20,8 +20,6 @@ function MoviesCardList({
   const location = useLocation();
   const [path, setPath] = useState(location.pathname);
 
-  console.log(savedMovies);
-
   useEffect(() => {
     setPath(location.pathname);
   }, [location]);

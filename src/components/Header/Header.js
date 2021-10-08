@@ -46,12 +46,7 @@ function Header({ onAccountButton, isLogged }) {
                 <AccountButton />
               </div>
               <button className='header__nav-account-button' onClick={onAccountButton}>
-                <img
-                  src={nav_button}
-                  alt='Navigation button'
-                  className='header__nav-img'
-                  onClick={onAccountButton}
-                />
+                <img src={nav_button} alt='Navigation button' className='header__nav-img' />
               </button>
             </>
           )}
