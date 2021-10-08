@@ -32,7 +32,7 @@ function Login({ onLogin }) {
         <p className='login__text'>E-mail</p>
         <input
           id='email'
-          value={values.email}
+          value={values.email || ''}
           type='email'
           name='email'
           required
@@ -43,7 +43,7 @@ function Login({ onLogin }) {
         <p className='login__text'>Пароль</p>
         <input
           id='password'
-          value={values.password}
+          value={values.password || ''}
           type='password'
           name='password'
           required
