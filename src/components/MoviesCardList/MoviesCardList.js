@@ -34,14 +34,14 @@ function MoviesCardList({
   }
 
   if (isEmpty) {
-    return <p>Ничего не найдено.</p>;
+    return <p className='movies-list__text'>Ничего не найдено.</p>;
   }
 
   if (error) {
     return (
-      <p>
+      <p className='movies-list__text'>
         Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен.
-        Подождите немного и попробуйте ещё раз
+        Подождите немного и попробуйте ещё раз.
       </p>
     );
   }

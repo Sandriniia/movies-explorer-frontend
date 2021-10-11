@@ -46,7 +46,7 @@ function App() {
         setError(null);
         setInitialMovies(movies);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => setError(error));
   }, []);
 
   const shortFilmsValue = {
