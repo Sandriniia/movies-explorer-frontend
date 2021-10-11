@@ -6,7 +6,7 @@ import './Login.css';
 import logo from '../../images/logo.png';
 
 function Login({ onLogin }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
   const history = useHistory();
 
   function handleSubmit(event) {
@@ -15,7 +15,6 @@ function Login({ onLogin }) {
       return;
     }
     onLogin(values)
-      .then(() => resetForm())
       .then(() => history.push('/movies'))
       .catch((err) => console.log(err));
   }
