@@ -25,6 +25,7 @@ function Profile({ onLogout, onAccountButton, isLogged, onUpdate, message }) {
       return;
     }
     onUpdate(userData);
+    setIsValid(false);
   };
 
   return (
