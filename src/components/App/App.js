@@ -63,7 +63,7 @@ function App() {
     setIsNavigationPopupOpen(false);
   }
 
-  function handleRegister({ email, password, name }) {
+  function handleRegister({ password, name }, email) {
     return auth
       .register(email, password, name)
       .then((res) => {
@@ -80,10 +80,7 @@ function App() {
       });
   }
 
-  console.log(errorMessage);
-  console.log(isLogged);
-
-  function handleLogin({ email, password }) {
+  function handleLogin({ password }, email) {
     return auth
       .login(email, password)
       .then((res) => {

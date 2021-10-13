@@ -5,14 +5,15 @@ import './Login.css';
 import logo from '../../images/logo.png';
 
 function Login({ onLogin, errorMessage }) {
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, isEmailValid, checkEmailValidation, emailValue } =
+    useFormWithValidation();
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (!isValid) {
+    if (!isValid && !isEmailValid) {
       return;
     }
-    onLogin(values);
+    onLogin(values, emailValue);
   }
 
   return (
@@ -27,14 +28,16 @@ function Login({ onLogin, errorMessage }) {
         <p className='login__text'>E-mail</p>
         <input
           id='email'
-          value={values.email || ''}
+          value={emailValue || ''}
           type='email'
           name='email'
           required
           className='login__input'
-          onChange={handleChange}
+          onChange={checkEmailValidation}
         ></input>
-        <p className='register__error-text'>{errors.email}</p>
+        <p className='register__error-text'>
+          {!isEmailValid ? 'Email введен в неверном формате.' : ''}
+        </p>
         <p className='login__text'>Пароль</p>
         <input
           id='password'
@@ -49,8 +52,10 @@ function Login({ onLogin, errorMessage }) {
         <p className='register__error-text'>{errorMessage}</p>
         <button
           type='submit'
-          className={`login__button ${!isValid ? 'register__button_disabled' : ''}`}
-          disabled={!isValid}
+          className={`login__button ${
+            !isValid || !isEmailValid ? 'register__button_disabled' : ''
+          }`}
+          disabled={!isValid || !isEmailValid}
         >
           Войти
         </button>

@@ -5,14 +5,15 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 import logo from '../../images/logo.png';
 
 function Register({ onRegister, errorMessage }) {
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, isEmailValid, checkEmailValidation, emailValue } =
+    useFormWithValidation();
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (!isValid) {
+    if (!isValid && !isEmailValid) {
       return;
     }
-    onRegister(values);
+    onRegister(values, emailValue);
   }
 
   return (
@@ -39,14 +40,16 @@ function Register({ onRegister, errorMessage }) {
         <p className='register__text'>E-mail</p>
         <input
           id='email'
-          value={values.email || ''}
+          value={emailValue || ''}
           type='email'
           name='email'
           required
           className='register__input'
-          onChange={handleChange}
+          onChange={checkEmailValidation}
         />
-        <p className='register__error-text'>{errors.email}</p>
+        <p className='register__error-text'>
+          {!isEmailValid ? 'Email введен в неверном формате.' : ''}
+        </p>
         <p className='register__text'>Пароль</p>
         <input
           id='password'
@@ -61,9 +64,11 @@ function Register({ onRegister, errorMessage }) {
         <p className='register__error-text'>{errors.password}</p>
         <p className='register__error-text'>{errorMessage}</p>
         <button
-          className={`register__button ${!isValid ? 'register__button_disabled' : ''}`}
+          className={`register__button ${
+            !isValid || !isEmailValid ? 'register__button_disabled' : ''
+          }`}
           type='submit'
-          disabled={!isValid}
+          disabled={!isValid || !isEmailValid}
         >
           Зарегистрироваться
         </button>
