@@ -5,7 +5,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({ onLogout, onAccountButton, isLogged, onUpdate }) {
+function Profile({ onLogout, onAccountButton, isLogged, onUpdate, message }) {
   const userContext = useContext(CurrentUserContext);
   const [userData, setUserData] = useState(userContext);
   const [errors, setErrors] = useState({});
@@ -55,6 +55,7 @@ function Profile({ onLogout, onAccountButton, isLogged, onUpdate }) {
           />
         </div>
         <p className='register__error-text'>{errors.email}</p>
+        <p className='register__error-text'>{message}</p>
         <button
           type='submit'
           disabled={!isValid}

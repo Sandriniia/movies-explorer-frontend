@@ -31,6 +31,7 @@ function App() {
   const [initialMovies, setInitialMovies] = useState([]);
   const [searchData, setSearchData] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleChangeSearchData = (event) => {
     setSearchData(event.target.value);
@@ -112,8 +113,13 @@ function App() {
       .updateUserData(data)
       .then((res) => {
         if (!res || res.status === 400) {
-          return 'Что то пошло не так';
+          setMessage('Что то пошло не так, новые данные не сохранены.');
+        } else {
+          setMessage('Новые данные успешно сохранены.');
         }
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
       })
       .catch((err) => console.log(err));
     api
@@ -239,6 +245,7 @@ function App() {
                 onAccountButton={handleNavigationButtonClick}
                 onLogout={onLogout}
                 onUpdate={updateCurrentUserData}
+                message={message}
               />
               <Route path='/not-found'>
                 <NotFoundPage />
