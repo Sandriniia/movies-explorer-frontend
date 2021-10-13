@@ -13,6 +13,7 @@ function SearchForm({
 }) {
   const location = useLocation();
   const [path, setPath] = useState(location.pathname);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     setPath(location.pathname);
@@ -20,19 +21,32 @@ function SearchForm({
 
   function getFilterMovies(event) {
     event.preventDefault();
-    onFilterMovies();
+    if (searchData.length === 0) {
+      setErrorMessage('Нужно ввести ключевое слово');
+    } else {
+      setErrorMessage('');
+      onFilterMovies();
+    }
   }
 
   const getFilterSavedMovies = (event) => {
     event.preventDefault();
-    onFilterSavedMovies();
+    if (searchData.length === 0) {
+      setErrorMessage('Нужно ввести ключевое слово');
+    } else {
+      setErrorMessage('');
+      onFilterSavedMovies();
+    }
   };
+
+  console.log(errorMessage);
 
   return (
     <section className='search-form'>
       <div className='search-form__container'>
         <form
           className='search-form__form'
+          noValidate
           onSubmit={path === '/movies' ? getFilterMovies : getFilterSavedMovies}
         >
           <input
@@ -48,6 +62,7 @@ function SearchForm({
             <img src={search_button} alt='loupe icon' className='search-form__icon' />
           </button>
         </form>
+        <p className='register__error-text'>{errorMessage}</p>
       </div>
       <FilterShortFilm onShortFilmsFilter={onShortFilmsFilter} />
     </section>
