@@ -4,8 +4,8 @@ import './Register.css';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 import logo from '../../images/logo.png';
 
-function Register({ onRegister }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+function Register({ onRegister, errorMessage }) {
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -13,7 +13,6 @@ function Register({ onRegister }) {
       return;
     }
     onRegister(values);
-    resetForm();
   }
 
   return (
@@ -60,6 +59,7 @@ function Register({ onRegister }) {
           onChange={handleChange}
         ></input>
         <p className='register__error-text'>{errors.password}</p>
+        <p className='register__error-text'>{errorMessage}</p>
         <button
           className={`register__button ${!isValid ? 'register__button_disabled' : ''}`}
           type='submit'

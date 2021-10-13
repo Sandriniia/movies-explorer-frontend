@@ -67,11 +67,12 @@ function App() {
     return auth
       .register(email, password, name)
       .then((res) => {
-        if (!res || res.status === 400) {
-          return 'Что то пошло не так';
+        if (res.message) {
+          setErrorMessage('Что то пошло не так');
         } else {
-          history.push('/movies');
+          setErrorMessage('');
           setIsLogged(true);
+          history.push('/movies');
         }
       })
       .catch((err) => {
@@ -189,7 +190,7 @@ function App() {
           <div className='App'>
             <Switch>
               <Route path='/sign-up'>
-                <Register onRegister={handleRegister} />
+                <Register onRegister={handleRegister} errorMessage={errorMessage} />
               </Route>
               <Route path='/sign-in'>
                 <Login onLogin={handleLogin} errorMessage={errorMessage} />

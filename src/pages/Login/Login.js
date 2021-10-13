@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 import './Login.css';
@@ -7,20 +6,13 @@ import logo from '../../images/logo.png';
 
 function Login({ onLogin, errorMessage }) {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
-  const history = useHistory();
 
   function handleSubmit(event) {
     event.preventDefault();
     if (!isValid) {
       return;
     }
-    onLogin(values)
-      .then(() => {
-        // if (errorMessage.length === 0) {
-        //   history.push('/movies');
-        // }
-      })
-      .catch((err) => console.log(err));
+    onLogin(values);
   }
 
   return (
