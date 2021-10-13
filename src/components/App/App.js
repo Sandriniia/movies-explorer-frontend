@@ -64,13 +64,21 @@ function App() {
   }
 
   function handleRegister({ password, name }, email) {
-    return auth
+    auth
       .register(email, password, name)
       .then((res) => {
         if (res.message) {
           setErrorMessage('Что то пошло не так');
         } else {
           setErrorMessage('');
+        }
+      })
+      .then(() => {
+        return auth.login(email, password);
+      })
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
           setIsLogged(true);
           history.push('/movies');
         }
@@ -81,7 +89,7 @@ function App() {
   }
 
   function handleLogin({ password }, email) {
-    return auth
+    auth
       .login(email, password)
       .then((res) => {
         if (res.message) {
