@@ -7,9 +7,11 @@ export const register = (email, password, name) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password, name }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
-  });
+  })
+    .then((res) => {
+      return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
+    })
+    .catch((err) => console.log(err));
 };
 
 export const login = (email, password) => {
@@ -20,7 +22,9 @@ export const login = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then((res) => res.json())
+    .then((res) => {
+      return res.json();
+    })
     .then((data) => {
       if (data) {
         localStorage.setItem('token', data.token);
@@ -39,9 +43,7 @@ export const checkToken = (token) => {
     },
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
+      return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
     })
     .then((data) => data);
 };

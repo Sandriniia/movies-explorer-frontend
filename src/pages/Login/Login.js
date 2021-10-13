@@ -5,7 +5,7 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 import './Login.css';
 import logo from '../../images/logo.png';
 
-function Login({ onLogin }) {
+function Login({ onLogin, errorMessage }) {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const history = useHistory();
 
@@ -15,7 +15,11 @@ function Login({ onLogin }) {
       return;
     }
     onLogin(values)
-      .then(() => history.push('/movies'))
+      .then(() => {
+        // if (errorMessage.length === 0) {
+        //   history.push('/movies');
+        // }
+      })
       .catch((err) => console.log(err));
   }
 
@@ -50,6 +54,7 @@ function Login({ onLogin }) {
           onChange={handleChange}
         ></input>
         <p className='register__error-text'>{errors.password}</p>
+        <p className='register__error-text'>{errorMessage}</p>
         <button
           type='submit'
           className={`login__button ${!isValid ? 'register__button_disabled' : ''}`}

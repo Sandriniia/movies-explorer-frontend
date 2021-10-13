@@ -30,6 +30,7 @@ function App() {
   const [error, setError] = useState(null);
   const [initialMovies, setInitialMovies] = useState([]);
   const [searchData, setSearchData] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChangeSearchData = (event) => {
     setSearchData(event.target.value);
@@ -65,29 +66,39 @@ function App() {
   function handleRegister({ email, password, name }) {
     return auth
       .register(email, password, name)
-      .then(() => {
-        history.push('/movies');
-        setIsLogged(true);
+      .then((res) => {
+        if (!res || res.status === 400) {
+          return 'Что то пошло не так';
+        } else {
+          history.push('/movies');
+          setIsLogged(true);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
+  console.log(errorMessage);
+  console.log(isLogged);
+
   function handleLogin({ email, password }) {
     return auth
       .login(email, password)
       .then((res) => {
-        if (!res || res.status === 400) {
-          return 'Что то пошло не так';
+        if (res.message) {
+          setErrorMessage(res.message);
         }
         if (res.token) {
+          setErrorMessage('');
           localStorage.setItem('token', res.token);
-          history.push('/movies');
           setIsLogged(true);
+          history.push('/movies');
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   const updateCurrentUserData = (data) => {
@@ -181,7 +192,7 @@ function App() {
                 <Register onRegister={handleRegister} />
               </Route>
               <Route path='/sign-in'>
-                <Login onLogin={handleLogin} />
+                <Login onLogin={handleLogin} errorMessage={errorMessage} />
               </Route>
               <Route exact path='/'>
                 <StudentProfilePage
