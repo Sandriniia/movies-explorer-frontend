@@ -5,8 +5,8 @@ function useFilterMovies() {
   const [isEmpty, setIsEmpty] = useState(false);
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  const filterByName = (moviesArr, data) => {
-    setIsLoading(true);
+  async function filterByName(moviesArr, data) {
+    await setIsLoading(true);
     const nameFilter = moviesArr.filter((movie) => {
       return movie?.nameRU.toLowerCase().includes(data.toLowerCase());
     });
@@ -17,10 +17,10 @@ function useFilterMovies() {
       setFilteredMovies(nameFilter);
     }
     setIsLoading(false);
-  };
+  }
 
-  const filterByDuration = () => {
-    setIsLoading(true);
+  async function filterByDuration() {
+    await setIsLoading(true);
     const timeFilter = filteredMovies.filter((movie) => {
       return movie.duration <= 40;
     });
@@ -31,10 +31,10 @@ function useFilterMovies() {
       setFilteredMovies(timeFilter);
     }
     setIsLoading(false);
-  };
+  }
 
-  const filterByNameAndDuration = (moviesArr, data) => {
-    setIsLoading(true);
+  async function filterByNameAndDuration(moviesArr, data) {
+    await setIsLoading(true);
     const timeAndNameFilter = moviesArr.filter((movie) => {
       return movie?.nameRU.toLowerCase().includes(data.toLowerCase()) && movie.duration <= 40;
     });
@@ -45,7 +45,7 @@ function useFilterMovies() {
       setFilteredMovies(timeAndNameFilter);
     }
     setIsLoading(false);
-  };
+  }
 
   return {
     filteredMovies,
