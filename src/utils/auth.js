@@ -7,11 +7,9 @@ export const register = (email, password, name) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password, name }),
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .catch((err) => console.log(err));
+  }).then((res) => {
+    return res.json();
+  });
 };
 
 export const login = (email, password) => {
@@ -30,8 +28,7 @@ export const login = (email, password) => {
         localStorage.setItem('token', data.token);
         return data;
       }
-    })
-    .catch((err) => console.log(err));
+    });
 };
 
 export const checkToken = (token) => {
@@ -43,8 +40,7 @@ export const checkToken = (token) => {
     },
   })
     .then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
+      return res.json();
     })
-    .then((data) => data)
-    .catch((err) => console.log(err));
+    .then((data) => data);
 };
