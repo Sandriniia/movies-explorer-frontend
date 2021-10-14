@@ -69,20 +69,22 @@ function App() {
     auth
       .register(email, password, name)
       .then((res) => {
-        if (res.message) {
-          setErrorMessage('Что то пошло не так');
+        if (res.message || !res) {
+          setErrorMessage(res.message);
         } else {
           setErrorMessage('');
-        }
-      })
-      .then(() => {
-        return auth.login(email, password);
-      })
-      .then((res) => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-          setIsLogged(true);
-          history.push('/movies');
+
+          return auth
+            .login(email, password)
+
+            .then((res) => {
+              if (res.token) {
+                localStorage.setItem('token', res.token);
+                setIsLogged(true);
+                setIsCheckingToken(false);
+                history.push('/movies');
+              }
+            });
         }
       })
       .catch((err) => {
@@ -120,7 +122,7 @@ function App() {
         }
         setTimeout(() => {
           setMessage('');
-        }, 3000);
+        }, 10000);
       })
       .catch((err) => console.log(err));
     api
