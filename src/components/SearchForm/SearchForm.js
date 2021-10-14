@@ -39,8 +39,6 @@ function SearchForm({
     }
   };
 
-  console.log(errorMessage);
-
   return (
     <section className='search-form'>
       <div className='search-form__container'>

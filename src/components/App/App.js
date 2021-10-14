@@ -37,6 +37,8 @@ function App() {
     setSearchData(event.target.value);
   };
 
+  console.log(isLogged);
+
   const handleShortFilmsButtonClick = () => {
     setIsShortFilmsButtonOn((prevState) => !prevState);
   };
@@ -138,7 +140,6 @@ function App() {
         .then((res) => {
           if (res) {
             setIsLogged(true);
-            history.push('/movies');
           }
         })
         .catch(() => {
@@ -251,9 +252,7 @@ function App() {
                 <NotFoundPage />
               </Route>
               <Redirect to='/not-found' />
-              <Route>
-                {isLogged ? <Redirect to='/movies'></Redirect> : <Redirect to='/'></Redirect>}
-              </Route>
+              <Route>{!isLogged && <Redirect to='/'></Redirect>}</Route>
             </Switch>
             <NavigationPopup isOpen={isNavigationPopupOpen} onClose={closePopup} />
           </div>

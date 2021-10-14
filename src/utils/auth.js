@@ -45,5 +45,6 @@ export const checkToken = (token) => {
     .then((res) => {
       return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
     })
-    .then((data) => data);
+    .then((data) => data)
+    .catch((err) => console.log(err));
 };
