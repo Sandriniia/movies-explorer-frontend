@@ -32,12 +32,11 @@ function App() {
   const [searchData, setSearchData] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [message, setMessage] = useState('');
+  const [isCheckingToken, setIsCheckingToken] = useState(true);
 
   const handleChangeSearchData = (event) => {
     setSearchData(event.target.value);
   };
-
-  console.log(isLogged);
 
   const handleShortFilmsButtonClick = () => {
     setIsShortFilmsButtonOn((prevState) => !prevState);
@@ -137,16 +136,18 @@ function App() {
     if (token) {
       api
         .getCurrentUserData(token)
-        .then((res) => {
-          if (res) {
-            setIsLogged(true);
-          }
+        .then((data) => {
+          setCurrentUser(data);
+          setIsLogged(true);
+          setIsCheckingToken(false);
         })
-        .catch(() => {
-          history.push('/');
+        .catch((err) => {
+          console.log(err);
         });
+    } else {
+      setIsCheckingToken(false);
     }
-  }, [history]);
+  }, []);
 
   useEffect(() => {
     checkToken();
@@ -159,7 +160,9 @@ function App() {
         .then((data) => {
           setCurrentUser(data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+        });
 
       api
         .getSavedMovies()
@@ -216,6 +219,7 @@ function App() {
               <ProtectedRoute
                 path='/movies'
                 isLogged={isLogged}
+                isCheckingToken={isCheckingToken}
                 onAccountButton={handleNavigationButtonClick}
                 component={Movies}
                 onSaveMovie={handleSaveMovie}
@@ -231,6 +235,7 @@ function App() {
               <ProtectedRoute
                 path='/saved-movies'
                 isLogged={isLogged}
+                isCheckingToken={isCheckingToken}
                 onAccountButton={handleNavigationButtonClick}
                 component={SavedMovies}
                 savedMovies={savedMovies}
@@ -243,6 +248,7 @@ function App() {
                 path='/profile'
                 component={Profile}
                 isLogged={isLogged}
+                isCheckingToken={isCheckingToken}
                 onAccountButton={handleNavigationButtonClick}
                 onLogout={onLogout}
                 onUpdate={updateCurrentUserData}
