@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.css';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
@@ -8,12 +8,16 @@ function Register({ onRegister, errorMessage }) {
   const { values, handleChange, errors, isValid, isEmailValid, checkEmailValidation, emailValue } =
     useFormWithValidation();
 
+  const [isDisabled, setIsDisabled] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
+    setIsDisabled(true);
     if (!isValid && !isEmailValid) {
       return;
     }
     onRegister(values, emailValue);
+    setIsDisabled(false);
   }
 
   return (
@@ -35,6 +39,7 @@ function Register({ onRegister, errorMessage }) {
           minLength='2'
           className='register__input'
           onChange={handleChange}
+          disabled={isDisabled}
         ></input>
         <p className='register__error-text'>{errors.name}</p>
         <p className='register__text'>E-mail</p>
@@ -46,6 +51,7 @@ function Register({ onRegister, errorMessage }) {
           required
           className='register__input'
           onChange={checkEmailValidation}
+          disabled={isDisabled}
         />
         <p className='register__error-text'>
           {!isEmailValid ? 'Email введен в неверном формате.' : ''}
@@ -60,15 +66,16 @@ function Register({ onRegister, errorMessage }) {
           minLength='8'
           className='register__input'
           onChange={handleChange}
+          disabled={isDisabled}
         ></input>
         <p className='register__error-text'>{errors.password}</p>
         <p className='register__error-text'>{errorMessage}</p>
         <button
           className={`register__button ${
-            !isValid || !isEmailValid ? 'register__button_disabled' : ''
+            isDisabled || !isValid || !isEmailValid ? 'register__button_disabled' : ''
           }`}
           type='submit'
-          disabled={!isValid || !isEmailValid}
+          disabled={isDisabled || !isValid || !isEmailValid}
         >
           Зарегистрироваться
         </button>

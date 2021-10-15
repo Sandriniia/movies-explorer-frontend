@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 import './Login.css';
@@ -8,12 +8,16 @@ function Login({ onLogin, errorMessage }) {
   const { values, handleChange, errors, isValid, isEmailValid, checkEmailValidation, emailValue } =
     useFormWithValidation();
 
+  const [isDisabled, setIsDisabled] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
+    setIsDisabled(true);
     if (!isValid && !isEmailValid) {
       return;
     }
     onLogin(values, emailValue);
+    setIsDisabled(false);
   }
 
   return (
@@ -34,6 +38,7 @@ function Login({ onLogin, errorMessage }) {
           required
           className='login__input'
           onChange={checkEmailValidation}
+          disabled={isDisabled}
         ></input>
         <p className='register__error-text'>
           {!isEmailValid ? 'Email введен в неверном формате.' : ''}
@@ -47,15 +52,16 @@ function Login({ onLogin, errorMessage }) {
           required
           className='login__input'
           onChange={handleChange}
+          disabled={isDisabled}
         ></input>
         <p className='register__error-text'>{errors.password}</p>
         <p className='register__error-text'>{errorMessage}</p>
         <button
           type='submit'
           className={`login__button ${
-            !isValid || !isEmailValid ? 'register__button_disabled' : ''
+            isDisabled || !isValid || !isEmailValid ? 'register__button_disabled' : ''
           }`}
-          disabled={!isValid || !isEmailValid}
+          disabled={isDisabled || !isValid || !isEmailValid}
         >
           Войти
         </button>
