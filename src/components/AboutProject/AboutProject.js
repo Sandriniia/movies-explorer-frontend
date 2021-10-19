@@ -15,7 +15,7 @@ function AboutProject() {
               финальные доработки.
             </p>
           </div>
-          <div div className='about-project__text-box'>
+          <div className='about-project__text-box'>
             <h3 className='about-project__title'>На выполнение диплома ушло 5 недель</h3>
             <p className='about-project__subtitle'>
               У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы

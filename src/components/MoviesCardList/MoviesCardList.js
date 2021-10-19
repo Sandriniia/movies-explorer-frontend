@@ -1,33 +1,117 @@
-//  компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством.
-//  На странице поиска при отправке формы поиска делается запрос на Beatfilm api
-// получаем все данные с сервера и после этого фильтруем и отображаем результат.
-// Все полученные данные сохраняются в переменной и обновляются в хранилище
-// При нажатии кнопки сохранить отправляется запрос к movies нашего api
-// При повторном нажатии этой кнопки, фильм удаляется
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
 import './MoviesCardList.css';
 import MoviesCard from '../../components/MoviesCard/MoviesCard';
-import data from '../../utils/data.json';
+import Loading from '../../components/Loading/Loading';
 
-function MoviesCardList() {
+function MoviesCardList({
+  onSaveMovie,
+  onDeleteMovie,
+  savedMovies,
+  movies,
+  isLoading,
+  error,
+  isEmpty,
+  limitMovies,
+  onRemoveMovies,
+  filteredSavedMovies,
+  isFilteredSavedMoviesEmpty,
+}) {
+  const location = useLocation();
+  const [path, setPath] = useState(location.pathname);
+
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [location]);
+
+  const getIsLiked = (movieId) => {
+    const savedMoviesIds = savedMovies.map((movie) => movie.movieId);
+    return savedMoviesIds.includes(movieId);
+  };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isEmpty) {
+    return <p className='movies-list__text'>Ничего не найдено.</p>;
+  }
+
+  if (error) {
+    return (
+      <p className='movies-list__text'>
+        Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен.
+        Подождите немного и попробуйте ещё раз.
+      </p>
+    );
+  }
+
+  if (isFilteredSavedMoviesEmpty) {
+    return <p>Совпадений нет.</p>;
+  }
+
   return (
     <div className='movies-list'>
       <div className='movies-list__container'>
-        {data?.map((movie) => {
-          return (
-            <MoviesCard
-              key={movie.id}
-              title={movie.title}
-              duration={movie.duration}
-              image={movie.image}
-            />
-          );
-        })}
+        {path === '/movies' && (
+          <>
+            {movies?.map((movie) => {
+              return (
+                <MoviesCard
+                  onDeleteMovie={onDeleteMovie}
+                  onSaveMovie={onSaveMovie}
+                  key={movie.id}
+                  title={movie.nameRU}
+                  duration={movie.duration}
+                  movie={movie}
+                  isLiked={getIsLiked(movie.id)}
+                  trailer={movie.trailerLink}
+                  image={`https://api.nomoreparties.co${movie.image.url}`}
+                />
+              );
+            })}
+          </>
+        )}
+        {path === '/saved-movies' &&
+        filteredSavedMovies.length === 0 &&
+        !isFilteredSavedMoviesEmpty ? (
+          <>
+            {savedMovies?.map((savedMovie) => {
+              return (
+                <MoviesCard
+                  onDeleteMovie={onDeleteMovie}
+                  key={savedMovie.movieId}
+                  title={savedMovie.nameRU}
+                  duration={savedMovie.duration}
+                  savedMovie={savedMovie}
+                  image={savedMovie.thumbnail}
+                  trailer={savedMovie.trailer}
+                />
+              );
+            })}
+          </>
+        ) : (
+          <>
+            {filteredSavedMovies?.map((savedMovie) => {
+              return (
+                <MoviesCard
+                  onDeleteMovie={onDeleteMovie}
+                  key={savedMovie.movieId}
+                  title={savedMovie.nameRU}
+                  duration={savedMovie.duration}
+                  savedMovie={savedMovie}
+                  image={savedMovie.thumbnail}
+                />
+              );
+            })}
+          </>
+        )}
       </div>
-      <button type='submit' className='movies-list__button'>
-        Еще
-      </button>
+      {path === '/movies' && limitMovies.length > 0 && (
+        <button onClick={onRemoveMovies} type='submit' className='movies-list__button'>
+          Еще
+        </button>
+      )}
     </div>
   );
 }

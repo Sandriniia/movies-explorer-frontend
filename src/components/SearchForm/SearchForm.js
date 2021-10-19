@@ -1,49 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
 import './SearchForm.css';
 import search_button from '../../images/find.png';
-import short_films_on from '../../images/short-films-on.png';
-import short_films_off from '../../images/short-films-off.png';
+import FilterShortFilm from '../FilterCheckbox/FilterShortFilm';
 
-function SearchForm() {
-  const [isButtonOn, setIsButtonOn] = useState(false);
+function SearchForm({
+  onFilterMovies,
+  onFilterSavedMovies,
+  onChangeSearchData,
+  searchData,
+  onShortFilmsFilter,
+}) {
+  const location = useLocation();
+  const [path, setPath] = useState(location.pathname);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleShortFilmsButtonClick = () => {
-    setIsButtonOn(!isButtonOn);
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [location]);
+
+  function getFilterMovies(event) {
+    event.preventDefault();
+    if (searchData.length === 0) {
+      setErrorMessage('Нужно ввести ключевое слово');
+    } else {
+      setErrorMessage('');
+      onFilterMovies();
+    }
+  }
+
+  const getFilterSavedMovies = (event) => {
+    event.preventDefault();
+    if (searchData.length === 0) {
+      setErrorMessage('Нужно ввести ключевое слово');
+    } else {
+      setErrorMessage('');
+      onFilterSavedMovies();
+    }
   };
+
   return (
     <section className='search-form'>
       <div className='search-form__container'>
-        <form className='search-form__form'>
+        <form
+          className='search-form__form'
+          noValidate
+          onSubmit={path === '/movies' ? getFilterMovies : getFilterSavedMovies}
+        >
           <input
             className='search-form__input'
             type='text'
             autoFocus
             placeholder='Фильм'
             required
+            value={searchData}
+            onChange={onChangeSearchData}
           />
           <button type='submit' className='search-form__button'>
             <img src={search_button} alt='loupe icon' className='search-form__icon' />
           </button>
         </form>
+        <p className='register__error-text'>{errorMessage}</p>
       </div>
-      <div className='search-form__short-films-box'>
-        <button className='search-form__short-films-button' onClick={handleShortFilmsButtonClick}>
-          {isButtonOn ? (
-            <img
-              src={short_films_on}
-              alt='Short films button on'
-              className='search-form__short-films-icon'
-            />
-          ) : (
-            <img
-              src={short_films_off}
-              alt='Short films button off'
-              className='search-form__short-films-icon'
-            />
-          )}
-        </button>
-        <p className='search-form__text'>Короткометражки</p>
-      </div>
+      <FilterShortFilm onShortFilmsFilter={onShortFilmsFilter} />
     </section>
   );
 }

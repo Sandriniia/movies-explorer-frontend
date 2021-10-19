@@ -1,0 +1,41 @@
+.short-films {
+  display: flex;
+}
+
+.short-films__button {
+  padding: 0;
+  margin-right: 14px;
+  border: none;
+  outline: none;
+  background: #202020;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.short-films__text {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+@media screen and (max-width: 767px) {
+  .short-films {
+    flex-direction: row-reverse;
+  }
+
+  .short-films__text {
+    margin-right: 16px;
+  }
+
+  .short-films__button {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .short-films__text {
+    font-size: 11px;
+  }
+}
