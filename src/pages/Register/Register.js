@@ -26,10 +26,10 @@ function Register({ onRegister, errorMessage }) {
         <Link to='/'>
           <img src={logo} alt='Logo' className='register__logo' />
         </Link>
-        <h1 className='register__title'>Добро пожаловать!</h1>
+        <h1 className='register__title'>Welcome!</h1>
       </div>
       <form className='register__form' onSubmit={handleSubmit}>
-        <p className='register__text'>Имя</p>
+        <p className='register__text'>Name</p>
         <input
           id='name'
           value={values.name || ''}
@@ -54,9 +54,9 @@ function Register({ onRegister, errorMessage }) {
           disabled={isDisabled}
         />
         <p className='register__error-text'>
-          {!isEmailValid ? 'Email введен в неверном формате.' : ''}
+          {!isEmailValid ? 'Email entered in incorrect format.' : ''}
         </p>
-        <p className='register__text'>Пароль</p>
+        <p className='register__text'>Password</p>
         <input
           id='password'
           value={values.password || ''}
@@ -77,12 +77,12 @@ function Register({ onRegister, errorMessage }) {
           type='submit'
           disabled={isDisabled || !isValid || !isEmailValid}
         >
-          Зарегистрироваться
+          Sign up
         </button>
         <div className='register__question-box'>
-          <p className='register__question'>Уже зарегистрированы?</p>
+          <p className='register__question'>Already have an account?</p>
           <Link to='/sign-in' className='register__link'>
-            Войти
+            Sign in
           </Link>
         </div>
       </form>

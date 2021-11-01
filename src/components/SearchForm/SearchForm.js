@@ -22,7 +22,7 @@ function SearchForm({
   function getFilterMovies(event) {
     event.preventDefault();
     if (searchData.length === 0) {
-      setErrorMessage('Нужно ввести ключевое слово');
+      setErrorMessage('Please enter a keyword');
     } else {
       setErrorMessage('');
       onFilterMovies();
@@ -32,7 +32,7 @@ function SearchForm({
   const getFilterSavedMovies = (event) => {
     event.preventDefault();
     if (searchData.length === 0) {
-      setErrorMessage('Нужно ввести ключевое слово');
+      setErrorMessage('Please enter a keyword');
     } else {
       setErrorMessage('');
       onFilterSavedMovies();
@@ -51,7 +51,7 @@ function SearchForm({
             className='search-form__input'
             type='text'
             autoFocus
-            placeholder='Фильм'
+            placeholder='Movie'
             required
             value={searchData}
             onChange={onChangeSearchData}

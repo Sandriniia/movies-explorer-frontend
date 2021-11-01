@@ -116,9 +116,9 @@ function App() {
       .updateUserData(data)
       .then((res) => {
         if (!res || res.status === 400) {
-          setMessage('Что то пошло не так, новые данные не сохранены.');
+          setMessage('Something went wrong, new info not saved.');
         } else {
-          setMessage('Новые данные успешно сохранены.');
+          setMessage('The new info has been successfully saved.');
         }
         setTimeout(() => {
           setMessage('');

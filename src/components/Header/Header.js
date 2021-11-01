@@ -16,11 +16,11 @@ function Header({ onAccountButton, isLogged }) {
           {!isLogged ? (
             <>
               <NavLink className='header__link header__link-register' to='sign-up'>
-                Регистрация
+                Sign up
               </NavLink>
               <div className='header__box'>
                 <NavLink className='header__link header__link-login' to='sign-in'>
-                  Войти
+                  Sign in
                 </NavLink>
               </div>
             </>
@@ -33,14 +33,14 @@ function Header({ onAccountButton, isLogged }) {
                     activeClassName='header__link_active'
                     className='header__link header__link_logged'
                   >
-                    Фильмы
+                    Movies
                   </NavLink>
                   <NavLink
                     activeClassName='header__link_active'
                     to='saved-movies'
                     className='header__link header__link_logged'
                   >
-                    Сохраненные фильмы
+                    Saved Movies
                   </NavLink>
                 </div>
                 <AccountButton />

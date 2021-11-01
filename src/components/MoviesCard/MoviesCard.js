@@ -30,7 +30,7 @@ function MoviesCard({
           />
         </div>
         <div className='movie__line'></div>
-        <p className='movie__duration'>{duration} мин.</p>
+        <p className='movie__duration'>{duration} min.</p>
       </div>
     </div>
   );

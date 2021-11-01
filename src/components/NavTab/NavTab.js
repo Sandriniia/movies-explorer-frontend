@@ -7,13 +7,13 @@ function NavTab() {
     <nav className='nav'>
       <ul className='nav__list'>
         <HashLink to='#about_project'>
-          <li className='nav__item'>О проекте</li>
+          <li className='nav__item'>About</li>
         </HashLink>
         <HashLink to='#techs'>
-          <li className='nav__item'>Тенологии</li>
+          <li className='nav__item'>Instruments</li>
         </HashLink>
         <HashLink to='#about_me'>
-          <li className='nav__item'>Студент</li>
+          <li className='nav__item'>Student</li>
         </HashLink>
       </ul>
     </nav>

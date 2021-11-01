@@ -26,7 +26,7 @@ function Login({ onLogin, errorMessage }) {
         <Link to='/'>
           <img src={logo} alt='Logo' className='login__logo' />
         </Link>
-        <h1 className='login__title'>Рады видеть!</h1>
+        <h1 className='login__title'>Welcome back!</h1>
       </div>
       <form className='login__form' onSubmit={handleSubmit}>
         <p className='login__text'>E-mail</p>
@@ -41,9 +41,9 @@ function Login({ onLogin, errorMessage }) {
           disabled={isDisabled}
         ></input>
         <p className='register__error-text'>
-          {!isEmailValid ? 'Email введен в неверном формате.' : ''}
+          {!isEmailValid ? 'Email entered in incorrect format.' : ''}
         </p>
-        <p className='login__text'>Пароль</p>
+        <p className='login__text'>Password</p>
         <input
           id='password'
           value={values.password || ''}
@@ -63,12 +63,12 @@ function Login({ onLogin, errorMessage }) {
           }`}
           disabled={isDisabled || !isValid || !isEmailValid}
         >
-          Войти
+          Sign in
         </button>
         <div className='login__question-box'>
-          <p className='login__question'>Еще не зарегистрированы?</p>
+          <p className='login__question'>Don't have an account yet?</p>
           <Link to='/sign-up' className='login__link'>
-            Регистрация
+            Sign up
           </Link>
         </div>
       </form>

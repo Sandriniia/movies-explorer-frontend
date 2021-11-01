@@ -11,7 +11,7 @@ function AccountButton({ onClose }) {
         to='/profile'
         className='account-button__link account-button__link_logged'
       >
-        Аккаунт
+        Your profile
       </NavLink>
       <button className='account-button__button'>
         <img src={account_icon} alt='Account button icon' className='account-button__icon' />

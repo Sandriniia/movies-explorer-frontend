@@ -6,7 +6,7 @@ function Portfolio() {
   return (
     <section className='portfolio'>
       <div className='portfolio__container'>
-        <h5 className='portfolio__title'>Портфолио</h5>
+        <h5 className='portfolio__title'>Portfolio</h5>
         <div className='portfolio__link-box'>
           <a
             href='https://sandriniia.github.io/how-to-learn/'
@@ -14,7 +14,7 @@ function Portfolio() {
             className='portfolio__link'
             rel='noreferrer'
           >
-            Статичный сайт
+            Static website
           </a>
           <img src={pointer} alt='Pointer' className='portfolio__icon' />
         </div>
@@ -25,7 +25,7 @@ function Portfolio() {
             className='portfolio__link'
             rel='noreferrer'
           >
-            Адаптивный сайт
+            Responsive website
           </a>
           <img src={pointer} alt='Pointer' className='portfolio__icon' />
         </div>
@@ -36,7 +36,7 @@ function Portfolio() {
             className='portfolio__link'
             rel='noreferrer'
           >
-            Одностраничное приложение
+            Single page application
           </a>
           <img src={pointer} alt='Pointer' className='portfolio__icon' />
         </div>

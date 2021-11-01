@@ -23,7 +23,7 @@ function FilterShortFilm({ onShortFilmsFilter }) {
           <img src={short_films_off} alt='Short films button off' className='short-films__icon' />
         )}
       </button>
-      <p className='short-films__text'>Короткометражки</p>
+      <p className='short-films__text'>shorts</p>
     </div>
   );
 }

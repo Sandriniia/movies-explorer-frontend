@@ -34,20 +34,20 @@ function MoviesCardList({
   }
 
   if (isEmpty) {
-    return <p className='movies-list__text'>Ничего не найдено.</p>;
+    return <p className='movies-list__text'>Nothing found.</p>;
   }
 
   if (error) {
     return (
       <p className='movies-list__text'>
-        Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен.
-        Подождите немного и попробуйте ещё раз.
+        Something went wrong. There may be a connection problem or the server is unavailable. Please
+        wait a bit and try again.
       </p>
     );
   }
 
   if (isFilteredSavedMoviesEmpty) {
-    return <p>Совпадений нет.</p>;
+    return <p>No matches.</p>;
   }
 
   return (
@@ -61,7 +61,7 @@ function MoviesCardList({
                   onDeleteMovie={onDeleteMovie}
                   onSaveMovie={onSaveMovie}
                   key={movie.id}
-                  title={movie.nameRU}
+                  title={movie.nameEN}
                   duration={movie.duration}
                   movie={movie}
                   isLiked={getIsLiked(movie.id)}
@@ -81,7 +81,7 @@ function MoviesCardList({
                 <MoviesCard
                   onDeleteMovie={onDeleteMovie}
                   key={savedMovie.movieId}
-                  title={savedMovie.nameRU}
+                  title={savedMovie.nameEN}
                   duration={savedMovie.duration}
                   savedMovie={savedMovie}
                   image={savedMovie.thumbnail}
@@ -97,7 +97,7 @@ function MoviesCardList({
                 <MoviesCard
                   onDeleteMovie={onDeleteMovie}
                   key={savedMovie.movieId}
-                  title={savedMovie.nameRU}
+                  title={savedMovie.nameEN}
                   duration={savedMovie.duration}
                   savedMovie={savedMovie}
                   image={savedMovie.thumbnail}
@@ -109,7 +109,7 @@ function MoviesCardList({
       </div>
       {path === '/movies' && limitMovies.length > 0 && (
         <button onClick={onRemoveMovies} type='submit' className='movies-list__button'>
-          Еще
+          Next
         </button>
       )}
     </div>

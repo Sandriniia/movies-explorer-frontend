@@ -5,17 +5,17 @@ function AboutMe() {
   return (
     <section id='about_me' className='about-me'>
       <div className='about-me__container'>
-        <h2 className='about-me__title'>Студент</h2>
+        <h2 className='about-me__title'>Student</h2>
         <div className='about-me__line'></div>
         <div className='about-me__info-container'>
           <div className='about-me__text-container'>
-            <h1 className='about-me__name'>Сандра</h1>
-            <p className='about-me__profession'>Фронтенд-разработчик, 30 лет</p>
+            <h1 className='about-me__name'>Sandra</h1>
+            <p className='about-me__profession'>Full-Stack Web-Developer</p>
             <p className='about-me__description'>
-              Я живу в Швеции, Мальмо. закончила факультет журналистики СГУ. У меня есть муж и дочь.
-              Я люблю читать, а ещё увлекаюсь ездой на велосипеде. Во время отпуска по уходу за
-              ребенком решила сменить профессию и начала кодить. Прошла курс по веб-разработке в
-              Яндексе и программу подготовки веб-разрабочтиков "FooCoding" в Мальмо.
+              I live in Malmö, Sweden. Fell in love with programming about four years ago. I've
+              started study Web Development during my maternity leave. I've finished Web Development
+              course by Yandex and web developer training program in Malmö - FooCoding by FooCafé.
+              My passion also incudes the worlds of the Strugatsky brothers and beauty of nature.
             </p>
             <div className='about-me__links'>
               <a
@@ -33,6 +33,14 @@ function AboutMe() {
                 rel='noreferrer'
               >
                 Github
+              </a>
+              <a
+                target='_blank'
+                href='https://www.linkedin.com/in/sandra-grebentcova-634074224/'
+                className='about-me__link'
+                rel='noreferrer'
+              >
+                LinkedIn
               </a>
             </div>
           </div>

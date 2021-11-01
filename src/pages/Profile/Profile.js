@@ -32,9 +32,9 @@ function Profile({ onLogout, onAccountButton, isLogged, onUpdate, message }) {
     <>
       <Header onAccountButton={onAccountButton} isLogged={isLogged} />
       <form className='profile' onSubmit={handleSubmit}>
-        <h1 className='profile__title'>Привет, {userData.name}!</h1>
+        <h1 className='profile__title'>Hello, {userData.name}!</h1>
         <div className='profile__box profile__box-name'>
-          <h5 className='profile__subtitle'>Имя</h5>
+          <h5 className='profile__subtitle'>Name</h5>
           <input
             className='profile__input'
             value={userData.name || ''}
@@ -62,10 +62,10 @@ function Profile({ onLogout, onAccountButton, isLogged, onUpdate, message }) {
           disabled={!isValid}
           className={`profile__button ${!isValid ? 'register__button_disabled' : ''}`}
         >
-          Редактировать
+          Edit
         </button>
         <Link className='profile__link-out' to='' onClick={onLogout}>
-          Выйти из аккаунта
+          Sign out
         </Link>
       </form>
       <Footer />

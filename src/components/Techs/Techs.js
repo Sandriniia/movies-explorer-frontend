@@ -5,12 +5,13 @@ function Techs() {
   return (
     <section id='techs' className='techs'>
       <div className='techs__container'>
-        <h2 className='techs__title'>Технологии</h2>
+        <h2 className='techs__title'>Instruments</h2>
         <div className='techs__line'></div>
         <div className='techs__box'>
-          <h1 className='techs__main-title'>7 технологий</h1>
+          <h1 className='techs__main-title'>7 technologies</h1>
           <p className='techs__subtitle'>
-            На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
+            On the Web Development course I mastered technologies that were applied in the diploma
+            project.
           </p>
           <div className='techs__skill-box'>
             <div className='techs__skill-item'>

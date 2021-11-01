@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className='footer'>
       <div className='footer__container'>
-        <p className='footer__text'>Учебный проект Яндекс.Практикум х BeatFilm.</p>
+        <p className='footer__text'>Training project Yandex.Practicum х BeatFilm.</p>
         <div className='footer__line'></div>
         <div className='footer__info-box'>
           <p className='footer__data'>© 2020</p>
@@ -16,7 +16,7 @@ function Footer() {
               className='footer__link'
               rel='noreferrer'
             >
-              Яндекс.Практикум
+              Yandex.Practicum
             </a>
             <a
               href='https://github.com/Sandriniia'
@@ -30,9 +30,17 @@ function Footer() {
               href='https://www.facebook.com/sandra.denisovna.9'
               target='_blank'
               rel='noreferrer'
-              className='footer__link footer__link-facebook'
+              className='footer__link'
             >
               Facebook
+            </a>
+            <a
+              href='https://www.linkedin.com/in/sandra-grebentcova-634074224/'
+              target='_blank'
+              rel='noreferrer'
+              className='footer__link footer__link-facebook'
+            >
+              LinkedIn
             </a>
           </div>
         </div>
